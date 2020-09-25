@@ -20,6 +20,38 @@ input[type="text"] {
 	font-size: 4.5vmin;
 }
 
+.t_amm {
+	padding: 0.8vmin;
+//	padding: 8px;
+}
+
+.d_opt {
+	text-align: center;
+}
+
+.opt {
+	width: 21vmin;
+}
+
+.aka {
+	width: 75vmin;
+}
+
+.eqp {
+	width: 75vmin;
+}
+
+.inf {
+//	display: none;
+	font-size: 80%;
+	width: 21vmin;
+}
+
+.brk {
+//	display: none;
+	font-size: 80%;
+}
+
 .d_btn {
 	position: sticky;
 	position: -webkit-sticky;
@@ -58,28 +90,6 @@ input[type="text"] {
 	vertical-align: middle;
 	text-align: center;
 	font-size: 4.5vmin;
-}
-
-.t_amm {
-//	width: 100%;
-	padding: 8px;
-}
-
-.opt {
-	width: 21vmin;
-}
-
-.aka {
-	width: 75vmin;
-}
-
-.eqp {
-	width: 75vmin;
-}
-
-.brk {
-	width: 100%;
-	display: none;
 }
 
 .lbl {
