@@ -7,6 +7,7 @@
 
 body {
 	background-color: #FFF7DF;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 input[type="text"] {
@@ -39,12 +40,28 @@ input[type="text"] {
 	background-color: #FFE8DF;
 }
 
+.b_lbl {
+	text-align: center;
+	width: 80px;
+	border-top: 1px #888888 solid;
+}
+.brk {
+	width: 700px;
+	display: none;
+}
+.ast {
+	width: 80px;
+	display: none;
+}
+.frm {
+	width: 80px;
+}
+
 .d_tie{
 	position: relative;
 	display: inline-block;
 }
-
-.clr{
+.clr {
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -60,93 +77,61 @@ input[type="text"] {
 	width: 820px;
 	padding: 8px;
 }
-
-.aka {
-	width: 140px;
-}
-
 .opt {
 	width: 100px;
 }
-
+.aka {
+	width: 140px;
+}
 .eqp {
 	width: 220px;
-}
-
-.brk {
-	width: 700px;
-	display: none;
-}
-
-.lbl {
-	text-align: center;
-	width: 80px;
-	border-top: 1px #888888 solid;
-}
-
-.ast {
-	width: 80px;
-	display: none;
-}
-
-.frm {
-	width: 80px;
-}
-
-.t_cls {
-	width: 820px;
-	padding: 8px;
-}
-
-.rac {
-	width: 169px;
-}
-
-.job {
-	width: 195px;
-}
-
-.t_ttl {
-	width: 820px;
-	padding: 8px;
-}
-
-.ttl {
-	width: 350px;
 }
 
 .t_fsn {
 	width: 820px;
 	padding: 8px;
 }
-
 .z_fsn {
 	display: none;
 }
-
 .fsn {
 	width: 710px;
 }
+
 .t_skl {
 	width: 820px;
 	padding: 8px;
 	background-color: #FFE8DF;
 }
-
+.b_mst {
+	display: none;
+}
+.mst {
+	width: 710px;
+}
 .z_skl {
 	display: none;
 }
-
 .skl {
 	width: 710px;
 }
 
-.b_mst {
-	display: none;
+.t_cls {
+	width: 820px;
+	padding: 8px;
 }
-
-.mst {
-	width: 710px;
+.rac {
+	width: 169px;
+}
+.job {
+	width: 195px;
+}
+.t_ttl {
+	width: 820px;
+	padding: 8px;
+}
+.ttl {
+	width: 350px;
 }
 
 .d_rsl {
@@ -157,54 +142,41 @@ input[type="text"] {
 	z-index: 2;
 	width: 820px;
 }
-
 .d_hln {
 	text-align: center;
 	font-weight: bold;
 	background-color: #DEB887;
 }
-
 .d_aln {
 	display: table-cell;
 	vertical-align: top;
 	text-align: center;
 	background-color: #DEB887;
 }
-
 .t_sts {
 	background-color: #FFE3BF;
 }
-
 .t_hed {
 	text-align: center;
 	background-color: #DEB887;
 	width: 410px;
 }
-
 .r_sts {
 	display: none;
 }
-
-.t_hed {
-	text-align: center;
-}
-
 .t_itm {
 	text-align: left;
 	width: 200px;
 	padding: 0px 0px 0px 25px;
 }
-
 .t_val {
 	text-align: right;
 	width: 55px;
 }
-
 .t_pct {
 	text-align: left;
 	width: 12px;
 }
-
 .t_mag {
 	text-align: right;
 	width: 55px;
@@ -217,15 +189,12 @@ input[type="text"] {
 	width: 800px;
 	padding: 10px;
 }
-
 .s_nt1 {
 	padding: 0px 0px 0px 1em;
 }
-
 .d_nt1 {
 	padding: 0px 0px 0px 1em;
 }
-
 .d_nt2 {
 	padding: 0px 0px 0px 2em;
 }
