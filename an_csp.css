@@ -1,15 +1,14 @@
 body {
 	-webkit-text-size-adjust: 100%;
 	background-color: #FFF7DF;
-	font-size: 4.5vmin;
+	font-size: 4vmin;
 }
 
 input[type="text"] {
 //	font-size: 100%;
 //	padding: 2px 3px;
-	padding: 0.1vmin;
 	background-color: #FFFFFF;
 	border: 1px #888888 solid;
-	height: 5vmin;
-	font-size: 4.7vmin;
+	height: 5.2vmin;
+	font-size: 4.8vmin;
 }
