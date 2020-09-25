@@ -3,12 +3,87 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>アルテスノート - キャラシミュレータ</title>
+		<link rel="stylesheet" href="jquery-uip.css">
+		<link rel="stylesheet" href="an_csp.css">
 	</head>
 	<body>
+		<table class="t_amm">
+			<thead>
+				<tr>
+					<th rowspan="2">装備箇所</th>
+					<th><div class="tmp1">
 						オプション1
 						オプション2
 						オプション3
+					</div></th>
+				</tr>
+				<tr>
+					<th><div class="tmp2">
 						二つ名
 						アイテム
+					</div></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="wp1">
+					<td rowspan="5" class="lbl">武器</td>
+					<td><div class="tmp3">
+						<div class="d_tie">
+							<input type="text" id="wp1o1" class="opt">
+							<div class="clr">×</div>
+						</div>
+						<div class="d_tie">
+							<input type="text" id="wp1o2" class="opt">
+							<div class="clr">×</div>
+						</div>
+						<div class="d_tie">
+							<input type="text" id="wp1o3" class="opt">
+							<div class="clr">×</div>
+						</div>
+					</div></td>
+				</tr>
+				<tr class="wp1">
+					<td><div class="tmp4">
+						<div class="d_tie">
+							<input type="text" id="wp1a" class="aka">
+							<div class="clr">×</div>
+						</div>
+						<div class="d_tie">
+							<input type="text" id="wp1e" class="eqp" data-sys="0">
+							<div class="clr">×</div>
+						</div>
+					</div></td>
+				</tr>
+				<tr class="wp1">
+					<td><div class="tmp5">
+					<基本情報>
+					</div></td>
+				</tr>
+				<tr class="wp1">
+					<td><div class="tmp6">
+					<オプション>
+					</div></td>
+				</tr>
+				<tr class="wp1">
+					<td><div class="tmp7">
+					<二つ名>
+					</div></td>
+				</tr>
+			</tbody>
+		</table>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script type="text/javascript" src="an_cs.js"></script>
+		<script type="text/javascript" src="asn.js"></script>
+		<script type="text/javascript" src="prm.js"></script>
+		<script type="text/javascript" src="opt.js"></script>
+		<script type="text/javascript" src="aka.js"></script>
+		<script type="text/javascript" src="eqp.js"></script>
+		<script type="text/javascript" src="rac.js"></script>
+		<script type="text/javascript" src="job.js"></script>
+		<script type="text/javascript" src="ttl.js"></script>
+		<script type="text/javascript" src="fsn.js"></script>
+		<script type="text/javascript" src="mst.js"></script>
+		<script type="text/javascript" src="skl.js"></script>
 	</body>
 </html>
