@@ -942,7 +942,7 @@ $(function(){
 					ptn += parseInt((Idv_job[1] !== undefined && Idv_job[1][idx] !== undefined) ? Idv_job[1][idx] : 0);
 					ptn *= parseInt((Sum_all[121] !== undefined) ? Sum_all[121] : 0) / 100;
 					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-					val = Math.max(Math.floor((val +  ptn) * mag), 1);
+					val = Math.max(Math.round((val +  ptn) * mag), 1);
 					mag = "(x" + mag.toFixed(2) + ")";
 				}
 				else if	(idx <= 39) {
