@@ -52,29 +52,30 @@ input[type="text"] {
 	position: absolute;
 	top: 0px;
 	right: 0px;
-	height: 3vmin;
-	width: 3vmin;
+	height: 4.5vmin;
+	width: 4.5vmin;
 	cursor: pointer;
 	vertical-align: middle;
 	text-align: center;
-	font-size: 3vmin;
+	font-size: 4.5vmin;
 }
 
 .t_amm {
-	width: 100%;
+//	width: 100%;
 	padding: 8px;
 }
 
-.aka {
-	width: 30vmin;
+.opt {
+	width: 23.8vmin;
+	margin: 0 0.1vmin 0 0;
 }
 
-.opt {
-	width: 25vmin;
+.aka {
+	width: 75vmin;
 }
 
 .eqp {
-	width: 46.5vmin;
+	width: 75vmin;
 }
 
 .brk {
@@ -84,7 +85,7 @@ input[type="text"] {
 
 .lbl {
 	text-align: center;
-	width: 15vmin;
+	width: 18vmin;
 	border-top: 1px #888888 solid;
 }
 
