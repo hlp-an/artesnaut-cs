@@ -777,7 +777,7 @@ $(function(){
 		var bdy = $(".z_skl:last").clone(true);
 		var num = parseInt($(bdy).attr("data-num")) + 1;
 		bdy.attr("data-num", num);
-		bdy.find(".lbl").text("スキル" + num);
+		bdy.find(".b_lbl").text("スキル" + num);
 		bdy.find(".z_acp").attr("id", "sk" + num);
 		bdy.find(".brk").attr("id", "sk" + num + "b");
 		bdy.find(".sk" + (num - 1)).attr("class", "sk" + num);
@@ -787,7 +787,7 @@ $(function(){
 		bdy.attr("class", "b_skl").find(".z_acp").attr("class", "skl");
 		set_acp_skl(bdy.find(".skl"), 0);
 
-		$(".b_skl").find(".lbl").each(function(idx) {
+		$(".b_skl").find(".b_lbl").each(function(idx) {
 			$(this).text("スキル" + (idx + 1));
 		});
 	}
