@@ -7,7 +7,7 @@
 }
 
 body {
-//	-webkit-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
 	background-color: #FFF7DF;
 	font-size: 4vmin;
 	font-family: Arial,Helvetica,sans-serif;
@@ -22,7 +22,16 @@ input[type="text"] {
 
 .t_amm {
 	padding: 0.8vmin;
-//	padding: 8px;
+}
+
+.b_lbl {
+	text-align: center;
+	width: 18vmin;
+	border-top: 1px #888888 solid;
+}
+
+.b_amm {
+	border-top: 1px #888888 solid;
 }
 
 .d_opt {
@@ -42,13 +51,13 @@ input[type="text"] {
 }
 
 .inf {
-//	display: none;
+	display: none;
 	font-size: 80%;
 	width: 21vmin;
 }
 
 .brk {
-//	display: none;
+	display: none;
 	font-size: 80%;
 }
 
@@ -90,12 +99,6 @@ input[type="text"] {
 	vertical-align: middle;
 	text-align: center;
 	font-size: 4.5vmin;
-}
-
-.lbl {
-	text-align: center;
-	width: 18vmin;
-	border-top: 1px #888888 solid;
 }
 
 .ast {
