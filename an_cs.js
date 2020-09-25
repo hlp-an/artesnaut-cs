@@ -967,7 +967,7 @@ $(function(){
 				}
 				else if	(idx <= 52) {
 					mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
-					val = ((val > 0) ? "+" : "-") + clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]().toFixed(1);
+					val = ((val > 0) ? "+" : "-") + (clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() - 0.05).toFixed(1);
 					pct = "%";
 				}
 				else if	(idx <= 53) {
@@ -983,20 +983,20 @@ $(function(){
 				}
 				else if	(idx <= 75) {
 					mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
-					val = ((val > 0) ? "+" : "-") + clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]().toFixed(1);
+					val = ((val > 0) ? "+" : "-") + (clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() - 0.05).toFixed(1);
 					pct = "%";
 				}
 				else if	(idx <= 76) {
 					if(val > 100000) val = "無効";
 					else {
 						mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
-						val = ((val > 0) ? "+" : "-") + clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]().toFixed(1);
+						val = ((val > 0) ? "+" : "-") + (clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() - 0.05).toFixed(1);
 						pct = "%";
 					}
 				}
 				else if	(idx <= 88) {
 					mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
-					val = ((val > 0) ? "+" : "-") + clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]().toFixed(1);
+					val = ((val > 0) ? "+" : "-") + (clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() - 0.05).toFixed(1);
 					pct = "%";
 				}
 				else if	(idx <= 89) {
@@ -1010,7 +1010,7 @@ $(function(){
 					if(val > 100000) val = "無効";
 					else {
 						mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
-						val = ((val > 0) ? "+" : "-") + clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]().toFixed(1);
+						val = ((val > 0) ? "+" : "-") + (clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() - 0.05).toFixed(1);
 						pct = "%";
 					}
 				}
