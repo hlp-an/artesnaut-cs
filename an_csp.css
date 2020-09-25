@@ -1,3 +1,9 @@
+body {
+//	-webkit-text-size-adjust: 100%;
+	background-color: #FFF7DF;
+	font-size: 3vmin;
+}
+
 input[type="text"] {
 //	font-size: 100%;
 //	padding: 2px 3px;
