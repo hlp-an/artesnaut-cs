@@ -986,8 +986,8 @@ $(function(){
 				}
 				else if	(idx <= 75) {
 					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-					tmp = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
-					mag = "(" + ((tmp > 0) ? "+" : "") + tmp.toFixed(1) + ")";
+					tmp = (val * mag).toFixed(1);
+					mag = "(" + ((tmp > 0) ? "+" : "") + tmp + ")";
 					val = ((tmp > 0) ? "+" : "-") + (clc_reg[Math.floor(Math.abs(((Math.abs(tmp) < 600) ? val : 500)/100))]() * 10).toFixed(1) / 10;
 					pct = "%";
 				}
@@ -1001,8 +1001,8 @@ $(function(){
 				}
 				else if	(idx <= 88) {
 					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-					tmp = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
-					mag = "(" + ((val > 0) ? "+" : "") + tmp.toFixed(1) + ")";
+					tmp = (val * mag).toFixed(1);
+					mag = "(" + ((val > 0) ? "+" : "") + tmp + ")";
 					val = ((tmp > 0) ? "+" : "-") + (clc_reg[Math.floor(Math.abs(((Math.abs(tmp) < 600) ? val : 500)/100))]() * 10).toFixed(1) / 10;
 					pct = "%";
 				}
