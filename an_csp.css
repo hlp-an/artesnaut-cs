@@ -13,3 +13,7 @@ input[type="text"] {
 	height: 3.5vmin;
 	font-size: 3vmin;
 }
+
+.opt {
+	font-size: 40px;
+}
