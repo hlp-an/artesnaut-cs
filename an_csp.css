@@ -11,9 +11,6 @@ input[type="text"] {
 	background-color: #FFFFFF;
 	border: 1px #888888 solid;
 	height: 3.5vmin;
-	font-size: 3vmin;
-}
-
-.opt {
+//	font-size: 3vmin;
 	font-size: 400px;
 }
