@@ -66,8 +66,8 @@ input[type="text"] {
 }
 
 .opt {
-	width: 23.8vmin;
-	margin: 0 0.1vmin 0 0;
+	width: 22vmin;
+//	margin: 0 0.1vmin 0 0;
 }
 
 .aka {
