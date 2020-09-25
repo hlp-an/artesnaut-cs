@@ -918,7 +918,7 @@ $(function(){
 			});
 		});
 
-		var ptn;
+		var tmp;
 		txt = "";
 		$(".r_sts").hide();
 		$(".t_val").text("");
@@ -926,7 +926,7 @@ $(function(){
 		$(".t_mag").text("");
 		Sum_all.map(function(val, idx) {
 			if(idx > 30 && val !== undefined) {
-				ptn = "";
+				tmp = "";
 				pct = "";
 				mag = "";
 				const clc_reg = {
@@ -938,11 +938,11 @@ $(function(){
 					5: function() { return 99; },
 				}
 				if	(idx <= 38) {
-					ptn = parseInt((Idv_rac[idx] !== undefined) ? Idv_rac[idx] : 0);
-					ptn += parseInt((Idv_job[1] !== undefined && Idv_job[1][idx] !== undefined) ? Idv_job[1][idx] : 0);
-					ptn *= parseInt((Sum_all[121] !== undefined) ? Sum_all[121] : 0) / 100;
+					tmp = parseInt((Idv_rac[idx] !== undefined) ? Idv_rac[idx] : 0);
+					tmp += parseInt((Idv_job[1] !== undefined && Idv_job[1][idx] !== undefined) ? Idv_job[1][idx] : 0);
+					tmp *= parseInt((Sum_all[121] !== undefined) ? Sum_all[121] : 0) / 100;
 					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-					val = Math.max(Math.round((val +  ptn) * mag), 1);
+					val = Math.max(Math.round((val +  tmp) * mag), 1);
 					mag = "(x" + mag.toFixed(2) + ")";
 				}
 				else if	(idx <= 39) {
@@ -971,7 +971,10 @@ $(function(){
 					pct = "%";
 				}
 				else if	(idx <= 53) {
-					val = ((val > 0) ? "+" : "") + val.toFixed(1);
+					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
+					val = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
+					if(mag !== 1)	mag = "(x" + mag.toFixed(2) + ")";
+					else		mag = "";
 					pct = "%";
 				}
 				else if	(idx <= 55) {
@@ -982,8 +985,10 @@ $(function(){
 					pct = "%";
 				}
 				else if	(idx <= 75) {
-					mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
-					val = ((val > 0) ? "+" : "-") + (clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() * 10).toFixed(1) / 10;
+					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
+					tmp = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
+					mag = "(" + ((tmp > 0) ? "+" : "") + tmp.toFixed(1) + ")";
+					val = ((tmp > 0) ? "+" : "-") + (clc_reg[Math.floor(Math.abs(((Math.abs(tmp) < 600) ? val : 500)/100))]() * 10).toFixed(1) / 10;
 					pct = "%";
 				}
 				else if	(idx <= 76) {
@@ -995,8 +1000,10 @@ $(function(){
 					}
 				}
 				else if	(idx <= 88) {
-					mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
-					val = ((val > 0) ? "+" : "-") + (clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() * 10).toFixed(1) / 10;
+					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
+					tmp = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
+					mag = "(" + ((val > 0) ? "+" : "") + tmp.toFixed(1) + ")";
+					val = ((tmp > 0) ? "+" : "-") + (clc_reg[Math.floor(Math.abs(((Math.abs(tmp) < 600) ? val : 500)/100))]() * 10).toFixed(1) / 10;
 					pct = "%";
 				}
 				else if	(idx <= 89) {
