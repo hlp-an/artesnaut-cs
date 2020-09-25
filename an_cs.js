@@ -1,4 +1,4 @@
-﻿$(function(){
+$(function(){
 	$("#tg6").on("click", function() {
 		$(".eqp").autocomplete( {
 			source: Lst_eqp[0],
@@ -894,9 +894,9 @@
 						}
 						else if	(val === 2) {
 							//ウォークライ
-							var hat = Math.max(0, Math.min((((isNaN(Sum_all[95]) ? 0 : Sum_all[95]) + 100) / 10), 100));
-							Mag_all[23] = isNaN(Mag_all[23]) ? hat : (Mag_all[23] + hat);
-							Mag_all[25] = isNaN(Mag_all[25]) ? hat : (Mag_all[25] + hat);
+							var hat = Math.max(0, Math.min((((isNaN(Sum_all[106]) ? 0 : Sum_all[106]) + 100) / 10), 100));
+							Mag_all[33] = isNaN(Mag_all[33]) ? hat : (Mag_all[33] + hat);
+							Mag_all[35] = isNaN(Mag_all[35]) ? hat : (Mag_all[35] + hat);
 						}
 					}
 					else if(Math.abs(val) < 0.001) {
