@@ -14,7 +14,7 @@ $(function(){
 
 	$("#tg2").on("click", function() {
 		if($(".d_aln").css("display") == "table-cell") {
-			$(".d_aln").css("display", "");
+			$(".d_aln").css("display", "block");
 			$(this).text("2列表示");
 		}
 		else{
@@ -41,7 +41,7 @@ $(function(){
 		set_acp_fsn($(".fsn"));
 		set_acp_skl($(".skl"), 0);
 
-		$("#tg2").text("2列表示");
+		$("#tg2").text("1列表示");
 
 		$(".wp2").hide();
 		$(".wp3").hide();
