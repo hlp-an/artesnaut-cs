@@ -3,13 +3,10 @@
 	overflow-y: auto;
 	overflow-x: auto;
 	padding-right: 20px;
-	font-size: 100%;
 }
 
 body {
-	-webkit-text-size-adjust: 100%;
 	background-color: #FFF7DF;
-	font-size: 4vmin;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -17,40 +14,26 @@ body {
 	position: sticky;
 	position: -webkit-sticky;
 	top: 0px;
-	left: 0px;
 	z-index: 3;
-	height: 5vw;
-	width: 80vh;
-	margin: -1vw -0.8vw;
-	transform-origin: bottom left;
-	transform: rotate(90deg);
-	-webkit-writing-mode: vertical-rl;
-	-webkit-transform: rotate(90deg);
 }
 .tgl_e {
-	font-size: 3vw;
-	height: 5vw;
-	width: 20vh;
+	width: 140px;
 	background-color: #FFF7DF;
 }
 .tgl_s {
-	font-size: 3vw;
-	height: 5vw;
-	width: 20vh;
+	width: 140px;
 	background-color: #DEB887;
 }
 .tgl_m {
-	font-size: 3vw;
-	height: 5vw;
-	width: 20vh;
+	width: 140px;
 	background-color: #FFE8DF;
 }
 
 input[type="text"] {
+	font-size: 14px;
+	padding: 2px 3px;
 	background-color: #FFFFFF;
 	border: 1px #888888 solid;
-	height: 5.2vmin;
-	font-size: 5vmin;
 }
 
 .d_tie {
@@ -61,100 +44,99 @@ input[type="text"] {
 	position: absolute;
 	top: 0px;
 	right: 0px;
-	height: 8vmin;
-	width: 8vmin;
+	height: 22px;
+	width: 22px;
+	margin: 2px;
 	cursor: pointer;
 	vertical-align: middle;
 	text-align: center;
-	font-size: 6vmin;
+	font-size: 20px;
 }
 
 .a_flx {
 	display: flex;
 	justify-content: space-around
 }
+.p_flx {
+	display: flex;
+	justify-content: space-around
+}
 
 .b_lbl {
 	text-align: center;
-	width: 18vmin;
+	width: 80px;
 	border-top: 1px #888888 solid;
-}
-.inf {
-	display: none;
-	width: 21vmin;
 }
 .brk {
 	display: none;
+	width: 360px;
+	font-size: 90%;
+}
+.inf {
+	display: none;
+	width: 110px;
 }
 
 .t_amm {
-	padding: 0.8vmin;
-	margin: 0 0 0 2vw;
-	font-size: 80%;
+	padding: 8px;
 }
 .b_amm {
 	border-top: 1px #888888 solid;
 }
 .opt {
-	width: 20vmin;
+	width: 146px;
+	margin: 2px;
 }
 .aka {
-	width: 75vmin;
+	width: 194px;
+	margin: 2px;
 }
 .eqp {
-	width: 75vmin;
+	width: 256px;
+	margin: 2px;
 }
 
 .t_fsn {
-	padding: 0.8vmin;
-	margin: 0 0 0 2vw;
-	font-size: 80%;
+	padding: 8px;
 }
 .z_fsn {
 	display: none;
 }
 .fsn {
-	width: 75vmin;
+	width: 466px;
 }
 
 .t_skl {
-	padding: 0.8vmin;
-	margin: 0 0 0 2vw;
-	font-size: 80%;
+	padding: 8px;
 	background-color: #FFE8DF;
 }
 .b_mst {
 	display: none;
 }
 .mst {
-	width: 75vmin;
+	width: 466px;
 }
 .z_skl {
 	display: none;
 }
 .skl {
-	width: 75vmin;
+	width: 466px;
 }
 
-.d_cls {
-	padding: 1.6vmin;
-	margin: 0 0 0 2vw;
-	font-size: 80%;
-}
 .t_cls {
-	padding: 0.8vmin;
+	padding: 8px;
 }
 .rac {
-	width: 40vmin;
+	width: 271px;
 }
 .job {
-	width: 40vmin;
+	width: 271px;
 }
 .t_ttl {
-	padding: 0.8vmin;
+	padding: 8px;
 }
 .ttl {
-	width: 40vmin;
+	width: 271px;
 }
 .spc {
 	width: 6em;
@@ -162,10 +144,11 @@ input[type="text"] {
 
 .d_rsl {
 	overflow-y: auto;
+	position: sticky;
+	position: -webkit-sticky;
+	top: 0px;
 	z-index: 2;
-	height: 100vh;
-	width: 93vmin;
-	margin: 0 0 0 4.2vmin;
+	height: 98vh;
 	background-color: #DEB887;
 }
 .d_hln {
@@ -174,10 +157,10 @@ input[type="text"] {
 	background-color: #DEB887;
 }
 .d_aln {
+	display: table-cell;
 	vertical-align: top;
 	text-align: center;
 	background-color: #DEB887;
-	font-size: 80%;
 }
 .t_sts {
 	background-color: #FFE3BF;
@@ -191,21 +174,21 @@ input[type="text"] {
 }
 .t_itm {
 	text-align: left;
-	width: 42vmin;
-	padding: 0 0 0 8vmin;
+	width: 160px;
+	padding: 0px 0px 0px 15px;
 }
 .t_val {
 	text-align: right;
-	width: 15vmin;
+	width: 65px;
 }
 .t_pct {
 	text-align: left;
-	width: 4vmin;
+	width: 20px;
 }
 .t_mag {
 	text-align: right;
-	width: 15vmin;
-	padding: 0 8vmin 0 0;
+	width: 75px;
+	padding: 0px 15px 0px 0px;
 }
 
 .d_ins {
