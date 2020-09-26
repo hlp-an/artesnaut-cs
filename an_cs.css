@@ -153,6 +153,7 @@ input[type="text"] {
 	background-color: #DEB887;
 }
 .d_aln {
+	display: table-cell;
 	vertical-align: top;
 	text-align: center;
 	background-color: #DEB887;
