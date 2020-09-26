@@ -1,4 +1,4 @@
-﻿$(function(){
+$(function(){
 	$("#tg6").on("click", function() {
 		$(".eqp").autocomplete( {
 			source: Lst_eqp[0],
@@ -13,64 +13,23 @@
 	});
 
 	$("#tg2").on("click", function() {
-		if($(".d_rsl").css("bottom") === "0px") {
-			$(".d_rsl").css("bottom","").css("height","");
-			$(this).text("ステータス表示");
-		}
-		else {
-			$(".d_rsl").css("bottom","0px").css("height","100vh");
+		if(scl == -1) {
+			scl = $(window).scrollTop();
+			$(".t_amm").hide();
+			$(".t_fsn").hide();
+			$(".t_skl").hide();
+			$(".d_cls").hide();
 			$(this).text("ステータス非表示");
 		}
-	});
-
-	$("#tg3").on("click", function() {
-		if	($(".d_rsl").height() > ($(".d_aln").height() + $(".d_hln").height()) * 3 / 4 + $(".d_hln").height()) {
-			$(".d_rsl").css("height", ($(".d_aln").height() * 3 / 4) + $(".d_hln").height() + "px");
-			$(this).text("もっとたたむ");
-			$("#tg4").text("さらに開く");
-		}
-		else if	($(".d_rsl").height() > ($(".d_aln").height() + $(".d_hln").height()) * 2 / 4 + $(".d_hln").height()) {
-			$(".d_rsl").css("height", ($(".d_aln").height() * 2 / 4) + $(".d_hln").height() + "px");
-			$(this).text("さらにたたむ");
-			$("#tg4").text("もっと開く");
-		}
-		else if	($(".d_rsl").height() > ($(".d_aln").height() + $(".d_hln").height()) * 1 / 4 + $(".d_hln").height()) {
-			$(".d_rsl").css("height", ($(".d_aln").height() * 1 / 4) + $(".d_hln").height() + "px");
-			$(this).text("全開にする");
-			$("#tg4").text("ちょっと開く");
-		}
 		else {
-			$(".d_rsl").css("height", $(".d_aln").height() + $(".d_hln").height() + "px");
-			$(this).text("ちょっとたたむ");
-			$("#tg4").text("かなりたたむ");
+			$(".t_amm").show();
+			$(".t_fsn").show();
+			$(".t_skl").show();
+			$(".d_cls").show();
+			$(window).scrollTop(scl);
+			scl = -1;
+			$(this).text("ステータス表示");
 		}
-
-		($(".d_rsl").css("bottom") !== "0px") && $(".d_rsl").css("bottom", $(".d_hln").height() - $(".d_rsl").height() + "px");
-	});
-
-	$("#tg4").on("click", function() {
-		if	($(".d_rsl").height() > ($(".d_aln").height() + $(".d_hln").height()) * 3 / 4 + $(".d_hln").height()) {
-			$(".d_rsl").css("height", ($(".d_aln").height() * 1 / 4) + $(".d_hln").height() + "px");
-			$(this).text("ちょっと開く");
-			$("#tg3").text("全開にする");
-		}
-		else if	($(".d_rsl").height() > ($(".d_aln").height() + $(".d_hln").height()) * 2 / 4 + $(".d_hln").height()) {
-			$(".d_rsl").css("height", $(".d_aln").height() + $(".d_hln").height() + "px");
-			$(this).text("かなりたたむ");
-			$("#tg3").text("ちょっとたたむ");
-		}
-		else if	($(".d_rsl").height() > ($(".d_aln").height() + $(".d_hln").height()) * 1 / 4 + $(".d_hln").height()) {
-			$(".d_rsl").css("height", ($(".d_aln").height() * 3 / 4) + $(".d_hln").height() + "px");
-			$(this).text("さらに開く");
-			$("#tg3").text("もっとたたむ");
-		}
-		else {
-			$(".d_rsl").css("height", ($(".d_aln").height() * 2 / 4) + $(".d_hln").height() + "px");
-			$(this).text("もっと開く");
-			$("#tg3").text("さらにたたむ");
-		}
-
-		($(".d_rsl").css("bottom") !== "0px") && $(".d_rsl").css("bottom", $(".d_hln").height() - $(".d_rsl").height() + "px");
 	});
 
 	$("#tg5").on("click", function() {
@@ -108,6 +67,8 @@
 
 		rst_wpn();
 	});
+
+	var scl = -1;
 
 	var Lst_opt = Dat_opt.map(val => val[0]);
 	var Lst_aka = Dat_aka.map(val => val[0]);
