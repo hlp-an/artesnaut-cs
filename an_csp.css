@@ -10,7 +10,40 @@ body {
 	-webkit-text-size-adjust: 100%;
 	background-color: #FFF7DF;
 	font-size: 4vmin;
-	font-family: Arial,Helvetica,sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.d_btn {
+	position: sticky;
+	position: -webkit-sticky;
+	top: 0px;
+	left: 0px;
+	z-index: 3;
+	height: 5vw;
+	width: 80vh;
+	margin: -1vw -0.8vw;
+	transform-origin: bottom left;
+	transform: rotate(90deg);
+	-webkit-writing-mode: vertical-rl;
+	-webkit-transform: rotate(90deg);
+}
+.tgl_e {
+	font-size: 3vw;
+	height: 5vw;
+	width: 20vh;
+	background-color: #FFF7DF;
+}
+.tgl_s {
+	font-size: 3vw;
+	height: 5vw;
+	width: 20vh;
+	background-color: #DEB887;
+}
+.tgl_m {
+	font-size: 3vw;
+	height: 5vw;
+	width: 20vh;
+	background-color: #FFE8DF;
 }
 
 input[type="text"] {
@@ -20,76 +53,11 @@ input[type="text"] {
 	font-size: 4.5vmin;
 }
 
-.t_amm {
-	padding: 0.8vmin;
-}
-
-.b_lbl {
-	text-align: center;
-	width: 18vmin;
-	border-top: 1px #888888 solid;
-}
-
-.b_amm {
-	border-top: 1px #888888 solid;
-}
-
-.d_opt {
-	text-align: center;
-}
-
-.opt {
-	width: 21vmin;
-}
-
-.aka {
-	width: 75vmin;
-}
-
-.eqp {
-	width: 75vmin;
-}
-
-.inf {
-	display: none;
-	font-size: 80%;
-	width: 21vmin;
-}
-
-.brk {
-	display: none;
-	font-size: 80%;
-}
-
-.d_btn {
-	position: sticky;
-	position: -webkit-sticky;
-	top: 0px;
-	z-index: 3;
-	width: 100%;
-}
-
-.tgl_e {
-	width: 140px;
-	background-color: #FFF7DF;
-}
-
-.tgl_s {
-	width: 140px;
-	background-color: #DEB887;
-}
-
-.tgl_m {
-	width: 140px;
-	background-color: #FFE8DF;
-}
-
-.d_tie{
+.d_tie {
 	position: relative;
 	display: inline-block;
 }
-
-.clr{
+.clr {
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -101,131 +69,139 @@ input[type="text"] {
 	font-size: 4.5vmin;
 }
 
-.ast {
-	width: 15vmin;
+.b_lbl {
+	text-align: center;
+	width: 18vmin;
+	border-top: 1px #888888 solid;
+}
+.inf {
+	display: none;
+	width: 21vmin;
+}
+.brk {
 	display: none;
 }
 
-.frm {
-	width: 80px;
+.t_amm {
+	padding: 0.8vmin;
+	margin: 0 0 0 2vw;
+	font-size: 80%;
 }
-
-.t_cls {
-	width: 820px;
-	padding: 8px;
+.b_amm {
+	border-top: 1px #888888 solid;
 }
-
-.rac {
-	width: 169px;
+.d_opt {
+	text-align: center;
 }
-
-.job {
-	width: 195px;
+.opt {
+	width: 21vmin;
 }
-
-.t_ttl {
-	width: 820px;
-	padding: 8px;
+.aka {
+	width: 75vmin;
 }
-
-.ttl {
-	width: 350px;
+.eqp {
+	width: 75vmin;
 }
 
 .t_fsn {
-	width: 820px;
-	padding: 8px;
+	padding: 0.8vmin;
+	margin: 0 0 0 2vw;
+	font-size: 80%;
 }
-
 .z_fsn {
 	display: none;
 }
-
 .fsn {
-	width: 710px;
+	width: 75vmin;
 }
+
 .t_skl {
-	width: 820px;
-	padding: 8px;
+	padding: 0.8vmin;
+	margin: 0 0 0 2vw;
+	font-size: 80%;
 	background-color: #FFE8DF;
 }
-
-.z_skl {
-	display: none;
-}
-
-.skl {
-	width: 710px;
-}
-
 .b_mst {
 	display: none;
 }
-
 .mst {
-	width: 710px;
+	width: 75vmin;
+}
+.z_skl {
+	display: none;
+}
+.skl {
+	width: 75vmin;
+}
+
+.d_cls {
+	padding: 1.6vmin;
+	margin: 0 0 0 2vw;
+	font-size: 80%;
+}
+.t_cls {
+	padding: 0.8vmin;
+}
+.rac {
+	width: 45vmin;
+}
+.job {
+	width: 45vmin;
+}
+.t_ttl {
+	padding: 0.8vmin;
+}
+.ttl {
+	width: 45vmin;
 }
 
 .d_rsl {
 	overflow-y: auto;
 	position: sticky;
 	position: -webkit-sticky;
-	bottom: 0px;
 	z-index: 2;
-	width: 820px;
+	width: 93vmin;
+	margin: 0 0 0 4.2vmin;
+	background-color: #DEB887;
 }
-
 .d_hln {
 	text-align: center;
 	font-weight: bold;
 	background-color: #DEB887;
 }
-
 .d_aln {
-	display: table-cell;
 	vertical-align: top;
 	text-align: center;
 	background-color: #DEB887;
+	font-size: 80%;
 }
-
 .t_sts {
 	background-color: #FFE3BF;
 }
-
 .t_hed {
 	text-align: center;
 	background-color: #DEB887;
-	width: 410px;
 }
-
 .r_sts {
 	display: none;
 }
-
-.t_hed {
-	text-align: center;
-}
-
 .t_itm {
 	text-align: left;
-	width: 200px;
-	padding: 0px 0px 0px 25px;
+	width: 42vmin;
+	padding: 0 0 0 8vmin;
 }
-
 .t_val {
 	text-align: right;
-	width: 55px;
+	width: 15vmin;
 }
-
 .t_pct {
 	text-align: left;
-	width: 12px;
+	width: 4vmin;
 }
-
 .t_mag {
 	text-align: right;
-	width: 55px;
-	padding: 0px 25px 0px 0px;
+	width: 15vmin;
+	padding: 0 8vmin 0 0;
 }
 
 .d_ins {
@@ -234,15 +210,12 @@ input[type="text"] {
 	width: 800px;
 	padding: 10px;
 }
-
 .s_nt1 {
 	padding: 0px 0px 0px 1em;
 }
-
 .d_nt1 {
 	padding: 0px 0px 0px 1em;
 }
-
 .d_nt2 {
 	padding: 0px 0px 0px 2em;
 }
