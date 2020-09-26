@@ -69,6 +69,11 @@ input[type="text"] {
 	font-size: 6vmin;
 }
 
+.a_flx {
+	display: flex;
+	justify-content: space-around
+}
+
 .b_lbl {
 	text-align: center;
 	width: 18vmin;
@@ -150,6 +155,9 @@ input[type="text"] {
 }
 .ttl {
 	width: 40vmin;
+}
+.spc {
+	width: 6em;
 }
 
 .d_rsl {
