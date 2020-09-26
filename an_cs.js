@@ -12,25 +12,59 @@ $(function(){
 		($(".brk").css("display") === "none") ? $(this).text("詳細表示") : $(this).text("一覧表示");
 	});
 
-	$("#tg2").on("click", function() {
-		if($(".d_aln").css("display") == "table-cell") {
-			$(".d_aln").css("display", "block");
-			$(this).text("2列表示");
-		}
-		else{
-			$(".d_aln").css("display", "table-cell");
-			$(this).text("1列表示");
-		}
-	});
+	if($(window).width() > 540) {
+		$("#tg2").text("1列表示");
+
+		$("#tg2").on("click", function() {
+			if($(".d_aln").css("display") == "table-cell") {
+				$(".d_aln").css("display", "block");
+				$(this).text("2列表示");
+			}
+			else{
+				$(".d_aln").css("display", "table-cell");
+				$(this).text("1列表示");
+			}
+		});
+	}
+	else {
+		var scl = -1;
+
+		$("#tg2").on("click", function() {
+			if(scl == -1) {
+				scl = $(window).scrollTop();
+				$(".t_amm").hide();
+				$(".t_fsn").hide();
+				$(".t_skl").hide();
+				$(".d_cls").hide();
+				$(this).text("ステータス非表示");
+			}
+			else {
+				$(".t_amm").show();
+				$(".t_fsn").show();
+				$(".t_skl").show();
+				$(".d_cls").show();
+				$(window).scrollTop(scl);
+				scl = -1;
+				$(this).text("ステータス表示");
+			}
+		});
+	}
 
 	$("#tg3").on("click", function() {
 		$(".b_mst").toggle();
 		($(".b_mst").css("display") === "none") ? $(this).text("極意スキル欄表示") : $(this).text("極意スキル欄非表示");
 	});
 
-	$(".clr").on("click", function() {
-		$(this).prev().val("").focus().autocomplete("close");
-	});
+	if($(window).width() > 540) {
+		$(".clr").on("click", function() {
+			$(this).prev().val("").focus().autocomplete("close");
+		});
+	}
+	else {
+		$(".clr").on("click", function() {
+			$(this).prev().val("").autocomplete("search", "").autocomplete("close");
+		});
+	}
 
 	$(function(){
 		$(".eqp").each(function() {
@@ -40,8 +74,6 @@ $(function(){
 		set_acp_ttl($("#tt2"), 2);
 		set_acp_fsn($(".fsn"));
 		set_acp_skl($(".skl"), 0);
-
-		$("#tg2").text("1列表示");
 
 		$(".wp2").hide();
 		$(".wp3").hide();
