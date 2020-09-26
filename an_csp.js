@@ -38,8 +38,7 @@ $(function(){
 	});
 
 	$(".clr").on("click", function() {
-//		$(this).prev().val("").focus().autocomplete("close");
-		$(this).prev().val("").autocomplete("search", "");
+		$(this).prev().val("").autocomplete("search", "").autocomplete("close");
 	});
 
 	$(function(){
