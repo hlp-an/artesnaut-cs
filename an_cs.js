@@ -857,7 +857,16 @@ $(function(){
 			});
 		}
 
+		Idv_ttl.map(function(arg, sfx) {
+			arg.map(function(val, idx) {
+				if(idx > 20 && val !== undefined) {
+					Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
+				}
+			});
+		});
+
 		rst_skl = "_";
+		var Spp = [];
 		Idv_mst.concat(Idv_skl).map(function(arg, sfx) {
 			arg.map(function(val, idx) {
 				if(idx > 30 && val !== undefined) {
@@ -869,16 +878,7 @@ $(function(){
 						//武器属性 += ", " + val;
 					}
 					else if(idx === 129) {
-						if	(val === 1) {
-							//根源との接触
-							
-						}
-						else if	(val === 2) {
-							//ウォークライ
-							var hat = Math.max(0, Math.min((((isNaN(Sum_all[106]) ? 0 : Sum_all[106]) + 100) / 10), 100));
-							Mag_all[33] = isNaN(Mag_all[33]) ? hat : (Mag_all[33] + hat);
-							Mag_all[35] = isNaN(Mag_all[35]) ? hat : (Mag_all[35] + hat);
-						}
+						Spp[val] = 1;
 					}
 					else if(Math.abs(val) < 0.001) {
 						val *= 1000000;
@@ -891,12 +891,17 @@ $(function(){
 			});
 		});
 
-		Idv_ttl.map(function(arg, sfx) {
-			arg.map(function(val, idx) {
-				if(idx > 20 && val !== undefined) {
-					Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
-				}
-			});
+		Spp.forEach(function(val, idx) {
+			if	(idx === 1) {
+				//根源との接触
+				
+			}
+			else if	(idx === 2) {
+				//ウォークライ
+				var hat = Math.max(0, Math.min((((isNaN(Sum_all[106]) ? 0 : Sum_all[106]) + 100) / 10), 100));
+				Mag_all[33] = isNaN(Mag_all[33]) ? hat : (Mag_all[33] + hat);
+				Mag_all[35] = isNaN(Mag_all[35]) ? hat : (Mag_all[35] + hat);
+			}
 		});
 
 		var tmp;
