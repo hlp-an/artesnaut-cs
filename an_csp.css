@@ -50,7 +50,7 @@ input[type="text"] {
 	background-color: #FFFFFF;
 	border: 1px #888888 solid;
 	height: 5.2vmin;
-	font-size: 4.5vmin;
+	font-size: 5vmin;
 }
 
 .d_tie {
@@ -61,7 +61,7 @@ input[type="text"] {
 	position: absolute;
 	top: 0px;
 	right: 0px;
-	height: 6vmin;
+	height: 8vmin;
 	width: 8vmin;
 	cursor: pointer;
 	vertical-align: middle;
@@ -143,16 +143,16 @@ input[type="text"] {
 	padding: 0.8vmin;
 }
 .rac {
-	width: 45vmin;
+	width: 40vmin;
 }
 .job {
-	width: 45vmin;
+	width: 40vmin;
 }
 .t_ttl {
 	padding: 0.8vmin;
 }
 .ttl {
-	width: 45vmin;
+	width: 40vmin;
 }
 
 .d_rsl {
