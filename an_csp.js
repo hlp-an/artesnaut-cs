@@ -32,7 +32,7 @@ $(function(){
 		}
 	});
 
-	$("#tg5").on("click", function() {
+	$("#tg3").on("click", function() {
 		$(".b_mst").toggle();
 		($(".b_mst").css("display") === "none") ? $(this).text("極意スキル欄表示") : $(this).text("極意スキル欄非表示");
 	});
