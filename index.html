@@ -4,7 +4,8 @@
 		<meta charset="UTF-8">
 		<title>アルテスノート - キャラシミュレータ</title>
 		<link rel="stylesheet" href="jquery-ui.css">
-		<link rel="stylesheet" href="an_cs.css">
+		<link rel="stylesheet" media="screen and (min-width:541px)" href="an_csp.css">
+		<link rel="stylesheet" media="screen and (max-width:540px)" href="an_csm.css">
 	</head>
 	<body>
 		<div class="p_flx">
@@ -78,6 +79,664 @@
 					<tr class="wp1">
 						<td class="inf"><二つ名></td>
 						<td id="wp1ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="wp2">
+						<td rowspan="4" class="b_lbl">武器2</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="wp2o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="wp2o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="wp2o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="wp2a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="wp2e" class="eqp" data-sys="0">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="wp2">
+						<td class="inf"><基本情報></td>
+						<td id="wp2be" class="brk"></td>
+					</tr>
+					<tr class="wp2">
+						<td class="inf"><オプション></td>
+						<td id="wp2bo" class="brk"></td>
+					</tr>
+					<tr class="wp2">
+						<td class="inf"><二つ名></td>
+						<td id="wp2ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="wp3">
+						<td rowspan="4" class="b_lbl">武器3</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="wp3o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="wp3o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="wp3o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="wp3a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="wp3e" class="eqp" data-sys="0">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="wp3">
+						<td class="inf"><基本情報></td>
+						<td id="wp3be" class="brk"></td>
+					</tr>
+					<tr class="wp3">
+						<td class="inf"><オプション></td>
+						<td id="wp3bo" class="brk"></td>
+					</tr>
+					<tr class="wp3">
+						<td class="inf"><二つ名></td>
+						<td id="wp3ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="sh1">
+						<td rowspan="4" class="b_lbl">盾</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="sh1o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="sh1o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="sh1o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="sh1a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="sh1e" class="eqp" data-sys="9">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="sh1">
+						<td class="inf"><基本情報></td>
+						<td id="sh1be" class="brk"></td>
+					</tr>
+					<tr class="sh1">
+						<td class="inf"><オプション></td>
+						<td id="sh1bo" class="brk"></td>
+					</tr>
+					<tr class="sh1">
+						<td class="inf"><二つ名></td>
+						<td id="sh1ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="sh2">
+						<td rowspan="4" class="b_lbl">盾2</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="sh2o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="sh2o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="sh2o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="sh2a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="sh2e" class="eqp" data-sys="9">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="sh2">
+						<td class="inf"><基本情報></td>
+						<td id="sh2be" class="brk"></td>
+					</tr>
+					<tr class="sh2">
+						<td class="inf"><オプション></td>
+						<td id="sh2bo" class="brk"></td>
+					</tr>
+					<tr class="sh2">
+						<td class="inf"><二つ名></td>
+						<td id="sh2ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="hd1">
+						<td rowspan="4" class="b_lbl">頭</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="hd1o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="hd1o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="hd1o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="hd1a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="hd1e" class="eqp" data-sys="10">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="hd1">
+						<td class="inf"><基本情報></td>
+						<td id="hd1be" class="brk"></td>
+					</tr>
+					<tr class="hd1">
+						<td class="inf"><オプション></td>
+						<td id="hd1bo" class="brk"></td>
+					</tr>
+					<tr class="hd1">
+						<td class="inf"><二つ名></td>
+						<td id="hd1ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="bd1">
+						<td rowspan="4" class="b_lbl">鎧</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="bd1o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="bd1o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="bd1o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="bd1a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="bd1e" class="eqp" data-sys="11">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="bd1">
+						<td class="inf"><基本情報></td>
+						<td id="bd1be" class="brk"></td>
+					</tr>
+					<tr class="bd1">
+						<td class="inf"><オプション></td>
+						<td id="bd1bo" class="brk"></td>
+					</tr>
+					<tr class="bd1">
+						<td class="inf"><二つ名></td>
+						<td id="bd1ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="am1">
+						<td rowspan="4" class="b_lbl">手</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="am1o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="am1o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="am1o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="am1a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="am1e" class="eqp" data-sys="12">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="am1">
+						<td class="inf"><基本情報></td>
+						<td id="am1be" class="brk"></td>
+					</tr>
+					<tr class="am1">
+						<td class="inf"><オプション></td>
+						<td id="am1bo" class="brk"></td>
+					</tr>
+					<tr class="am1">
+						<td class="inf"><二つ名></td>
+						<td id="am1ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="lg1">
+						<td rowspan="4" class="b_lbl">脚</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="lg1o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="lg1o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="lg1o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="lg1a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="lg1e" class="eqp" data-sys="13">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="lg1">
+						<td class="inf"><基本情報></td>
+						<td id="lg1be" class="brk"></td>
+					</tr>
+					<tr class="lg1">
+						<td class="inf"><オプション></td>
+						<td id="lg1bo" class="brk"></td>
+					</tr>
+					<tr class="lg1">
+						<td class="inf"><二つ名></td>
+						<td id="lg1ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="ac1">
+						<td rowspan="4" class="b_lbl">その他1</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="ac1o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="ac1o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="ac1o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="ac1a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="ac1e" class="eqp" data-sys="14">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="ac1">
+						<td class="inf"><基本情報></td>
+						<td id="ac1be" class="brk"></td>
+					</tr>
+					<tr class="ac1">
+						<td class="inf"><オプション></td>
+						<td id="ac1bo" class="brk"></td>
+					</tr>
+					<tr class="ac1">
+						<td class="inf"><二つ名></td>
+						<td id="ac1ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="ac2">
+						<td rowspan="4" class="b_lbl">その他2</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="ac2o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="ac2o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="ac2o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="ac2a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="ac2e" class="eqp" data-sys="14">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="ac2">
+						<td class="inf"><基本情報></td>
+						<td id="ac2be" class="brk"></td>
+					</tr>
+					<tr class="ac2">
+						<td class="inf"><オプション></td>
+						<td id="ac2bo" class="brk"></td>
+					</tr>
+					<tr class="ac2">
+						<td class="inf"><二つ名></td>
+						<td id="ac2ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="ac3">
+						<td rowspan="4" class="b_lbl">その他3</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="ac3o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="ac3o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="ac3o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="ac3a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="ac3e" class="eqp" data-sys="14">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="ac3">
+						<td class="inf"><基本情報></td>
+						<td id="ac3be" class="brk"></td>
+					</tr>
+					<tr class="ac3">
+						<td class="inf"><オプション></td>
+						<td id="ac3bo" class="brk"></td>
+					</tr>
+					<tr class="ac3">
+						<td class="inf"><二つ名></td>
+						<td id="ac3ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="ac4">
+						<td rowspan="4" class="b_lbl">その他4</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="ac4o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="ac4o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="ac4o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="ac4a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="ac4e" class="eqp" data-sys="14">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="ac4">
+						<td class="inf"><基本情報></td>
+						<td id="ac4be" class="brk"></td>
+					</tr>
+					<tr class="ac4">
+						<td class="inf"><オプション></td>
+						<td id="ac4bo" class="brk"></td>
+					</tr>
+					<tr class="ac4">
+						<td class="inf"><二つ名></td>
+						<td id="ac4ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="ac5">
+						<td rowspan="4" class="b_lbl">その他5</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="ac5o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="ac5o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="ac5o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="ac5a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="ac5e" class="eqp" data-sys="14">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="ac5">
+						<td class="inf"><基本情報></td>
+						<td id="ac5be" class="brk"></td>
+					</tr>
+					<tr class="ac5">
+						<td class="inf"><オプション></td>
+						<td id="ac5bo" class="brk"></td>
+					</tr>
+					<tr class="ac5">
+						<td class="inf"><二つ名></td>
+						<td id="ac5ba" class="brk"></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="ac6">
+						<td rowspan="4" class="b_lbl">その他6</td>
+						<td colspan="2" class="b_amm">
+							<div class="a_flx">
+								<div class="d_tie">
+									<input type="text" id="ac6o1" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="ac6o2" class="opt">
+									<div class="clr">×</div>
+								</div>
+								<div class="d_tie">
+									<input type="text" id="ac6o3" class="opt">
+									<div class="clr">×</div>
+								</div>
+							</div>
+							<div class="p_flx">
+								<div class="d_aka">
+									<div class="d_tie">
+										<input type="text" id="ac6a" class="aka">
+										<div class="clr">×</div>
+									</div>
+								</div>
+								<div class="d_eqp">
+									<div class="d_tie">
+										<input type="text" id="ac6e" class="eqp" data-sys="14">
+										<div class="clr">×</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="ac6">
+						<td class="inf"><基本情報></td>
+						<td id="ac6be" class="brk"></td>
+					</tr>
+					<tr class="ac6">
+						<td class="inf"><オプション></td>
+						<td id="ac6bo" class="brk"></td>
+					</tr>
+					<tr class="ac6">
+						<td class="inf"><二つ名></td>
+						<td id="ac6ba" class="brk"></td>
 					</tr>
 				</tbody>
 			</table>
