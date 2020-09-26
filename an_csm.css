@@ -211,8 +211,7 @@ input[type="text"] {
 .d_ins {
 	font-size: 90%;
 	background-color: #FFE3BF;
-	width: 800px;
-	padding: 10px;
+	padding: 5vmin;
 }
 .s_nt1 {
 	padding: 0px 0px 0px 1em;
