@@ -12,7 +12,12 @@ $(function(){
 		($(".brk").css("display") === "none") ? $(this).text("詳細表示") : $(this).text("一覧表示");
 	});
 
-	if($(window).width() > 540) {
+	$("#tg3").on("click", function() {
+		$(".b_mst").toggle();
+		($(".b_mst").css("display") === "none") ? $(this).text("極意スキル欄表示") : $(this).text("極意スキル欄非表示");
+	});
+
+	if($(window).width() > 980) {
 		$("#tg2").text("1列表示");
 
 		$("#tg2").on("click", function() {
@@ -24,6 +29,10 @@ $(function(){
 				$(".d_aln").css("display", "table-cell");
 				$(this).text("1列表示");
 			}
+		});
+
+		$(".clr").on("click", function() {
+			$(this).prev().val("").focus().autocomplete("close");
 		});
 	}
 	else {
@@ -48,19 +57,7 @@ $(function(){
 				$(this).text("ステータス表示");
 			}
 		});
-	}
 
-	$("#tg3").on("click", function() {
-		$(".b_mst").toggle();
-		($(".b_mst").css("display") === "none") ? $(this).text("極意スキル欄表示") : $(this).text("極意スキル欄非表示");
-	});
-
-	if($(window).width() > 540) {
-		$(".clr").on("click", function() {
-			$(this).prev().val("").focus().autocomplete("close");
-		});
-	}
-	else {
 		$(".clr").on("click", function() {
 			$(this).prev().val("").autocomplete("search", "").autocomplete("close");
 		});
