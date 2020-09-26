@@ -45,6 +45,7 @@ $(function(){
 				$(".t_fsn").hide();
 				$(".t_skl").hide();
 				$(".d_cls").hide();
+				$(".d_ins").hide();
 				$(this).text("ステータス非表示");
 			}
 			else {
@@ -52,6 +53,7 @@ $(function(){
 				$(".t_fsn").show();
 				$(".t_skl").show();
 				$(".d_cls").show();
+				$(".d_ins").show();
 				$(window).scrollTop(scl);
 				scl = -1;
 				$(this).text("ステータス表示");
