@@ -74,12 +74,12 @@ $(function(){
 		set_acp_fsn($(".fsn"));
 		set_acp_skl($(".skl"), 0);
 
-		$(".wp2").hide();
-		$(".wp3").hide();
-		$(".sh2").hide();
-		$(".ac4").hide();
-		$(".ac5").hide();
-		$(".ac6").hide();
+		$("#wp2").hide();
+		$("#wp3").hide();
+		$("#sh2").hide();
+		$("#ac4").hide();
+		$("#ac5").hide();
+		$("#ac6").hide();
 
 		$("#rc1").val(Lst_rac[0]);
 		prc_rac($("#rc1"));
@@ -152,14 +152,13 @@ $(function(){
 	var Idv_skl = [];
 	var Idv_all = [];
 	var Sum_opt = [];
-	var Sum_all = [];
 	var Mag_opt = [];
 	var Mag_aka = [];
 	var Mag_tmp = [];
-	var Mag_all = [];
 
 	var Cor_fsn = [[],[],[],[],];
 	var Cor_skl = [[],[],[],[],];
+	var Eqp_log = [1, 1, 1, 1, 1, 1, 3];
 
 	var rst_job = "_1_2_3_4_5_6_7_8_";
 	var rst_skl = "";
@@ -168,8 +167,6 @@ $(function(){
 	var Pnt = [];
 	var txt;
 	var skl;
-	var pct;
-	var mag;
 
 	//opt
 	$(".opt").autocomplete( {
@@ -597,7 +594,7 @@ $(function(){
 		[...new Set(Cor_fsn[2])].forEach(function(arg) {
 			if(arg !== "self") {
 				flg = 0;
-				$($("[type=text]").not(".opt, .fsn, .skl, .z_acp").get().reverse()).each(function() {
+				$($("[type=text]:visible").not(".opt, .fsn, .skl, .z_acp").get().reverse()).each(function() {
 					if($(this).val() === arg) {
 						flg = 1;
 						return false;
@@ -784,7 +781,7 @@ $(function(){
 		[...new Set(Cor_skl[2])].forEach(function(arg) {
 			if(arg !== "self") {
 				flg = 0;
-				$($("[type=text]").not(".opt, .skl, .z_acp").get().reverse()).each(function() {
+				$($("[type=text]:visible").not(".opt, .skl, .z_acp").get().reverse()).each(function() {
 					if($(this).val() === arg) {
 						flg = 1;
 						return false;
@@ -823,25 +820,35 @@ $(function(){
 	}
 
 	function clc_all() {
-		Sum_all = [];
-		Mag_all = [];
+		var Sum_amm = [[],[]];
+		var Sum_all = [];
+		var Mag_all = [];
 
 		Sum_opt.map(function(arg, sfx) {
+			if(Sum_amm[sfx] === undefined) {
+				Sum_amm[sfx] = [];
+			}
 			arg.map(function(val, idx) {
 				val *= 1 + ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
-				Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
+				Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
 			});
 		});
 		Idv_aka.map(function(arg, sfx) {
+			if(Sum_amm[sfx] === undefined) {
+				Sum_amm[sfx] = [];
+			}
 			arg.map(function(val, idx) {
 				val *= ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
-				Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
+				Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
 			});
 		});
 		Idv_eqp.map(function(arg, sfx) {
+			if(Sum_amm[sfx] === undefined) {
+				Sum_amm[sfx] = [];
+			}
 			arg.map(function(val, idx) {
 				val *= 1 + ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
-				Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
+				Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
 			});
 		});
 
@@ -871,6 +878,7 @@ $(function(){
 
 		rst_skl = "_";
 		var Spp = [];
+		var Eqp_cnt = [1, 1, 1, 1, 1, 1, 3];
 		Idv_mst.concat(Idv_skl).map(function(arg, sfx) {
 			arg.map(function(val, idx) {
 				if(idx > 30 && val !== undefined) {
@@ -884,6 +892,36 @@ $(function(){
 					else if(idx === 129) {
 						Spp[val] = 1;
 					}
+					else if(idx === 130) {
+						if	(val === 1) {
+							//暗器使い
+							Eqp_cnt[0] += 2;
+							Eqp_cnt[1] -= 1;
+							Eqp_cnt[6] -= 3;
+							rst_job = "_";
+							rst_skl += 1 + "_";
+							rst_wpn();
+						}
+						else if	(val === 2) {
+							//両手盾
+							Eqp_cnt[0] -= 1;
+							Eqp_cnt[1] += 1;
+						}
+						else if	(val === 3) {
+							//過剰装飾
+							Eqp_cnt[0] -= 1;
+							Eqp_cnt[1] -= 1;
+							Eqp_cnt[6] += 2;
+						}
+						else if	(val === 4) {
+							//器用貧乏
+							Eqp_cnt[6] += 1;
+						}
+						else if	(val === 5) {
+							//半竜の大角
+							Eqp_cnt[2] -= 1;
+						}
+					}
 					else if(Math.abs(val) < 0.001) {
 						val *= 1000000;
 						Mag_all[idx] = isNaN(Mag_all[idx]) ? val : (Mag_all[idx] + val);
@@ -895,10 +933,58 @@ $(function(){
 			});
 		});
 
+		var dif;
+		var flg = 0;
+		var i;
+		Eqp_cnt.forEach(function(arg, sfx) {
+			if((dif = arg - Eqp_log[sfx]) !== 0) {
+				flg = 1;
+				if(dif > 0) {
+					i = Eqp_log[sfx] + 1;
+					for(Eqp_log[sfx] = arg; i <= arg; i++) {
+						$("#" + Asn[sfx] + i).show();
+						Grp["amm"] = Asn[sfx] + i;
+						cln_skl();
+						clc_amm();
+					}
+				}
+				else {
+					for(i = arg + 1; i <= Eqp_log[sfx]; i++) {
+						$("#" + Asn[sfx] + i).hide();
+					}
+					Eqp_log[sfx] = arg;
+					if(!del_skl()) {
+						return;
+					}
+				}
+			}
+			else {
+				for(i = 1; i <= arg; i++) {
+					if(Sum_amm[Asn[Asn[sfx] + i]] !== undefined) {
+						Sum_amm[Asn[Asn[sfx] + i]].forEach(function(val, idx) {
+							Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
+						});
+					}
+				}
+			}
+		});
+		if(flg !== 0) {
+			clc_all();
+			return;
+		}
+
 		Spp.forEach(function(val, idx) {
 			if	(idx === 1) {
-				//根源との接触
-				
+				//暗器使い
+				for(i = 0; i <= 2; i++) {
+					if(Sum_amm[i] !== undefined) {
+						Sum_amm[i].forEach(function(val, idx) {
+							if(idx !== 54 && (idx < 77 || 89 < idx) && idx !== 52) val /= 2;
+							else { val = 0; }
+							Sum_all[idx] = isNaN(Sum_all[idx]) ? -1 * val : (Sum_all[idx] - val);
+						});
+					}
+				}
 			}
 			else if	(idx === 2) {
 				//ウォークライ
@@ -906,8 +992,14 @@ $(function(){
 				Mag_all[33] = isNaN(Mag_all[33]) ? hat : (Mag_all[33] + hat);
 				Mag_all[35] = isNaN(Mag_all[35]) ? hat : (Mag_all[35] + hat);
 			}
+			else if	(idx === 3) {
+				//根源との接触
+				
+			}
 		});
 
+		var pct;
+		var mag;
 		var tmp;
 		txt = "";
 		$(".r_sts").hide();
