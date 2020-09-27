@@ -852,6 +852,14 @@
 			});
 		});
 
+		Idv_fsn.map(function(arg, sfx) {
+			arg.map(function(val, idx) {
+				if(idx > 30 && val !== undefined) {
+					Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
+				}
+			});
+		});
+
 		if(Idv_rac !== undefined) {
 			Idv_rac.map(function(val, idx) {
 				if(idx > 30 && val !== undefined) {
@@ -870,7 +878,7 @@
 
 		Idv_ttl.map(function(arg, sfx) {
 			arg.map(function(val, idx) {
-				if(idx > 20 && val !== undefined) {
+				if(idx > 30 && val !== undefined) {
 					Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
 				}
 			});
