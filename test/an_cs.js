@@ -1,4 +1,4 @@
-﻿$(function(){
+$(function(){
 
 	$("#tg6").on("click", function() {
 		$(".eqp").autocomplete( {
@@ -99,7 +99,37 @@
 	});
 
 	$(".hdl_r").on("click", function() {
-		set_cns($("#" + $(this).attr("data-tgt")).val().slice(location.origin.length + location.pathname.length));
+		var dmn = location.origin + location.pathname;
+		var tgt = $("#" + $(this).attr("data-tgt"));
+		if(tgt.val().length > dmn.length && tgt.val().substr(0, dmn.length) === dmn) {
+			set_cns(tgt.val().slice(dmn.length));
+		}
+		else {
+			if(tgt.attr("data-url").length > dmn.length) {
+				set_cns(tgt.attr("data-url").slice(dmn.length));
+			}
+			else if(tgt.val().length > 0){
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", tgt.val(), true); 
+				xhr.withCredentials = true;
+				xhr.send(); 
+				xhr.onload = function() {
+//alert(xhr.responseURL);
+					if(xhr.responseURL.length > dmn.length) {
+						tgt.attr("data-url", xhr.responseURL);
+						set_cns(xhr.responseURL.slice(dmn.length));
+					}
+				}
+				xhr.onerror = function() {
+				 alert("2"); 
+alert(xhr.responseURL);
+					if(xhr.responseURL.length > dmn.length) {
+						tgt.attr("data-url", xhr.responseURL);
+						set_cns(xhr.responseURL.slice(dmn.length));
+					}
+				}
+			}
+		}
 	});
 
 	$(function(){
@@ -132,6 +162,7 @@
 			set_cns(location.search);
 			$("#fr1").val("ロード時のデータ");
 			$("#qr1").val(location.href);
+			$("#qr1").attr("data-url", location.href);
 		}
 	});
 
@@ -1235,6 +1266,7 @@
 		}
 		$("#fr1").val("");
 		$("#qr1").val(url);
+		$("#qr1").attr("data-url", url);
 	}
 
 	function set_cns(arg) {
