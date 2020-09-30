@@ -1,4 +1,4 @@
-$(function(){
+﻿$(function(){
 
 	$("#tg6").on("click", function() {
 		$(".eqp").autocomplete( {
@@ -109,25 +109,8 @@ $(function(){
 				set_cns(tgt.attr("data-url").slice(dmn.length));
 			}
 			else if(tgt.val().length > 0){
-				var xhr = new XMLHttpRequest();
-				xhr.open("GET", tgt.val(), true); 
-				xhr.withCredentials = true;
-				xhr.send(); 
-				xhr.onload = function() {
-//alert(xhr.responseURL);
-					if(xhr.responseURL.length > dmn.length) {
-						tgt.attr("data-url", xhr.responseURL);
-						set_cns(xhr.responseURL.slice(dmn.length));
-					}
-				}
-				xhr.onerror = function() {
-				 alert("2"); 
-alert(xhr.responseURL);
-					if(xhr.responseURL.length > dmn.length) {
-						tgt.attr("data-url", xhr.responseURL);
-						set_cns(xhr.responseURL.slice(dmn.length));
-					}
-				}
+				fetch($(tgt).val()).then(val => tgt.attr("data-url", val.url));
+				set_cns(tgt.attr("data-url").slice(dmn.length));
 			}
 		}
 	});
