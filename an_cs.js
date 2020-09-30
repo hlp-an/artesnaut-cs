@@ -1,4 +1,5 @@
 ﻿$(function(){
+
 	$("#tg6").on("click", function() {
 		$(".eqp").autocomplete( {
 			source: Lst_eqp[0],
@@ -31,6 +32,23 @@
 			}
 		});
 
+		$("#ad2").on("click", function() {
+			get_cns();
+			$("#qr1").select();
+			document.execCommand("copy");
+		});
+
+		$("#ad4").on("click", function() {
+			get_cns();
+			stn_bit().done(function(val) {
+				if(val.data.url) $("#qr1").val(val.data.url);
+				$("#qr1").select();
+				document.execCommand("copy");
+			}).fail(function() {
+				alert("短縮URLの取得に失敗しました。1時間の生成制限に達した可能性があります。");
+			});
+		});
+
 		$(".clr").on("click", function() {
 			$(this).prev().val("").focus().autocomplete("close");
 		});
@@ -45,6 +63,7 @@
 				$(".t_fsn").hide();
 				$(".t_skl").hide();
 				$(".d_cls").hide();
+				$(".d_adm").hide();
 				$(".d_ins").hide();
 				$(this).text("ステータス非表示");
 			}
@@ -53,6 +72,7 @@
 				$(".t_fsn").show();
 				$(".t_skl").show();
 				$(".d_cls").show();
+				$(".d_adm").show();
 				$(".d_ins").show();
 				$(window).scrollTop(scl);
 				scl = -1;
@@ -60,10 +80,59 @@
 			}
 		});
 
+		$("#ad2").on("click", function() {
+			get_cns();
+			$("#qr1").focus().get(0).setSelectionRange(0, $("#qr1").val().length);
+			document.execCommand("copy");
+		});
+
+		$("#ad4").on("click", function() {
+			get_cns();
+			stn_bit().done(function(val) {
+				if(val.data.url) $("#qr1").val(val.data.url);
+				$("#qr1").focus().get(0).setSelectionRange(0, $("#qr1").val().length);
+				document.execCommand("copy");
+			}).fail(function() {
+				alert("短縮URLの取得に失敗しました。1時間の生成制限に達した可能性があります。");
+			});
+		});
+
 		$(".clr").on("click", function() {
 			$(this).prev().val("").autocomplete("search", "").autocomplete("close");
 		});
 	}
+
+	$("#ad1").on("click", function() {
+		get_cns();
+	});
+
+	$("#ad3").on("click", function() {
+		get_cns();
+		stn_bit().done(function(val) {
+			if(val.data.url) $("#qr1").val(val.data.url);
+		}).fail(function() {
+			alert("短縮URLの取得に失敗しました。1時間の生成制限に達した可能性があります。");
+		});
+	});
+
+	$(".hdl_r").on("click", function() {
+		var dmn = location.origin + location.pathname;
+		var tgt = $("#" + $(this).attr("data-tgt"));
+		if(tgt.val().length > dmn.length && tgt.val().substr(0, dmn.length) === dmn) {
+			set_cns(tgt.val().slice(dmn.length));
+		}
+		else {
+			if(tgt.attr("data-url").length > dmn.length) {
+				set_cns(tgt.attr("data-url").slice(dmn.length));
+			}
+			else if(tgt.val().length > 0){
+/*
+				fetch($(tgt).val()).then(val => tgt.attr("data-url", val.url));
+				set_cns(tgt.attr("data-url").slice(dmn.length));
+*/
+			}
+		}
+	});
 
 	$(function(){
 		$(".eqp").each(function() {
@@ -90,7 +159,25 @@
 		}
 
 		rst_wpn();
+
+		if(location.search.length > 0) {
+			set_cns(location.search);
+			$("#fr1").val("ロード時のデータ");
+			$("#qr1").val(location.href);
+			$("#qr1").attr("data-url", location.href);
+		}
 	});
+
+	var Cod_all = [];
+	var Cod_opt = [];
+	var Cod_aka = [];
+	var Cod_eqp = [];
+	var Cod_rac = [];
+	var Cod_job = [];
+	var Cod_ttl = [];
+	var Cod_fsn = [];
+	var Cod_mst = [];
+	var Cod_skl = [];
 
 	var Lst_opt = Dat_opt.map(val => val[0]);
 	var Lst_aka = Dat_aka.map(val => val[0]);
@@ -167,6 +254,7 @@
 	var Pnt = [];
 	var txt;
 	var skl;
+	var spr = 0;
 
 	//opt
 	$(".opt").autocomplete( {
@@ -295,7 +383,7 @@
 						val *= ((Mag_opt[Asn[Grp["amm"]]] === undefined) ? 0 : Mag_opt[Asn[Grp["amm"]]]) + ((Mag_aka[Asn[Grp["amm"]]] === undefined) ? 0 : Mag_aka[Asn[Grp["amm"]]]);
 						txt += Prm[idx] + ((val > 0) ? "+" : "") + val + "　";
 					}
-					else if(idx > 2) {
+					else if(idx > 3) {
 						prc_skl($(".skl:last").val(val), Ary[0]);
 						skl += val + "　";
 					}
@@ -313,7 +401,7 @@
 						val *= 1 + ((Mag_opt[Asn[Grp["amm"]]] === undefined) ? 0 : Mag_opt[Asn[Grp["amm"]]]) + ((Mag_aka[Asn[Grp["amm"]]] === undefined) ? 0 : Mag_aka[Asn[Grp["amm"]]]);
 						txt += Prm[idx] + ((val > 0) ? "+" : "") + val + "　";
 					}
-					else if(idx > 2) {
+					else if(idx > 3) {
 						prc_skl($(".skl:last").val(val), Ary[0]);
 						skl += val + "　";
 					}
@@ -366,7 +454,7 @@
 					if(idx > 30) {
 						txt += Prm[idx] + ((val > 0) ? "+" : "") + val + "　";
 					}
-					else if(idx > 2) {
+					else if(idx > 3) {
 						prc_skl($(".skl:last").val(val), Ary[0]);
 						skl += val + "　";
 					}
@@ -410,7 +498,7 @@
 						if(idx > 30) {
 							txt += Prm[idx] + ((val > 0) ? "+" : "") + val + "　";
 						}
-						else if(idx > 2) {
+						else if(idx > 3) {
 							prc_skl($(".skl:last").val(val), Ary[0]);
 							skl += val + "　";
 						}
@@ -467,7 +555,7 @@
 					if(idx > 30) {
 						txt += Prm[idx] + ((val > 0) ? "+" : "") + val + "　";
 					}
-					else if(idx > 2) {
+					else if(idx > 3) {
 						prc_skl($(".skl:last").val(val), Ary[0]);
 						skl += val + "　";
 					}
@@ -558,7 +646,7 @@
 					if(idx > 30) {
 						txt += Prm[idx] + ((val > 0) ? "+" : "") + val + "　";
 					}
-					else if(idx > 2) {
+					else if(idx > 3) {
 						prc_skl($(".skl:last").val(val), Ary[0]);
 						skl += val + "　";
 					}
@@ -594,7 +682,7 @@
 		[...new Set(Cor_fsn[2])].forEach(function(arg) {
 			if(arg !== "self") {
 				flg = 0;
-				$($("[type=text]:visible").not(".opt, .fsn, .skl, .z_acp").get().reverse()).each(function() {
+				$($("[type=text]:visible").not(".opt, .fsn, .skl, .z_acp, .frw, .qry").get().reverse()).each(function() {
 					if($(this).val() === arg) {
 						flg = 1;
 						return false;
@@ -775,47 +863,52 @@
 	}
 
 	function del_skl() {
-		var flg;
-		var tal;
-		var Rmv_skl = [[],[],];
-		[...new Set(Cor_skl[2])].forEach(function(arg) {
-			if(arg !== "self") {
-				flg = 0;
-				$($("[type=text]:visible").not(".opt, .skl, .z_acp").get().reverse()).each(function() {
-					if($(this).val() === arg) {
-						flg = 1;
-						return false;
-					}
-				});
-				if(flg === 0) {
-					tal = Cor_skl[2].length - 1;
-					Cor_skl[2].slice().reverse().forEach(function(val, idx) {
-						if(val === arg) {
-							Rmv_skl[0].push(Cor_skl[0][tal - idx]);
-							Rmv_skl[1].push(Cor_skl[1][tal - idx]);
-							Cor_skl[0].splice(tal - idx, 1);
-							Cor_skl[1].splice(tal - idx, 1);
-							Cor_skl[2].splice(tal - idx, 1);
-							Cor_skl[3].splice(tal - idx, 1);
+		if(spr === 0) {
+			var flg;
+			var tal;
+			var Rmv_skl = [[],[],];
+			[...new Set(Cor_skl[2])].forEach(function(arg) {
+				if(arg !== "self") {
+					flg = 0;
+					$($("[type=text]:visible").not(".opt, .skl, .z_acp, .frw, .qry").get().reverse()).each(function() {
+						if($(this).val() === arg) {
+							flg = 1;
+							return false;
 						}
 					});
+					if(flg === 0) {
+						tal = Cor_skl[2].length - 1;
+						Cor_skl[2].slice().reverse().forEach(function(val, idx) {
+							if(val === arg) {
+								Rmv_skl[0].push(Cor_skl[0][tal - idx]);
+								Rmv_skl[1].push(Cor_skl[1][tal - idx]);
+								Cor_skl[0].splice(tal - idx, 1);
+								Cor_skl[1].splice(tal - idx, 1);
+								Cor_skl[2].splice(tal - idx, 1);
+								Cor_skl[3].splice(tal - idx, 1);
+							}
+						});
+					}
 				}
-			}
-		});
+			});
 
-		flg = 0;
-		Rmv_skl[0].forEach(function(val, idx) {
-			if(!Cor_skl[0].includes(val)) {
-				prc_skl($("#" + Rmv_skl[1][idx]).val(""), "");
-				flg = 1;
-			}
-		});
+			flg = 0;
+			Rmv_skl[0].forEach(function(val, idx) {
+				if(!Cor_skl[0].includes(val)) {
+					prc_skl($("#" + Rmv_skl[1][idx]).val(""), "");
+					flg = 1;
+				}
+			});
 
-		if(flg === 0) {
-			return true;
+			if(flg === 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		else {
-			return false;
+			return true;
 		}
 	}
 
@@ -824,65 +917,67 @@
 		var Sum_all = [];
 		var Mag_all = [];
 
-		Sum_opt.map(function(arg, sfx) {
-			if(Sum_amm[sfx] === undefined) {
-				Sum_amm[sfx] = [];
-			}
-			arg.map(function(val, idx) {
-				val *= 1 + ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
-				Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
-			});
-		});
-		Idv_aka.map(function(arg, sfx) {
-			if(Sum_amm[sfx] === undefined) {
-				Sum_amm[sfx] = [];
-			}
-			arg.map(function(val, idx) {
-				val *= ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
-				Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
-			});
-		});
-		Idv_eqp.map(function(arg, sfx) {
-			if(Sum_amm[sfx] === undefined) {
-				Sum_amm[sfx] = [];
-			}
-			arg.map(function(val, idx) {
-				val *= 1 + ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
-				Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
-			});
-		});
-
-		Idv_fsn.map(function(arg, sfx) {
-			arg.map(function(val, idx) {
-				if(idx > 30 && val !== undefined) {
-					Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
+		if(spr === 0){
+			Sum_opt.map(function(arg, sfx) {
+				if(Sum_amm[sfx] === undefined) {
+					Sum_amm[sfx] = [];
 				}
+				arg.map(function(val, idx) {
+					val *= 1 + ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
+					Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
+				});
 			});
-		});
-
-		if(Idv_rac !== undefined) {
-			Idv_rac.map(function(val, idx) {
-				if(idx > 30 && val !== undefined) {
-					Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
+			Idv_aka.map(function(arg, sfx) {
+				if(Sum_amm[sfx] === undefined) {
+					Sum_amm[sfx] = [];
 				}
+				arg.map(function(val, idx) {
+					val *= ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
+					Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
+				});
+			});
+			Idv_eqp.map(function(arg, sfx) {
+				if(Sum_amm[sfx] === undefined) {
+					Sum_amm[sfx] = [];
+				}
+				arg.map(function(val, idx) {
+					val *= 1 + ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
+					Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
+				});
+			});
+
+			Idv_fsn.map(function(arg, sfx) {
+				arg.map(function(val, idx) {
+					if(idx > 30 && val !== undefined) {
+						Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
+					}
+				});
+			});
+
+			if(Idv_rac !== undefined) {
+				Idv_rac.map(function(val, idx) {
+					if(idx > 30 && val !== undefined) {
+						Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
+					}
+				});
+			}
+
+			if(Idv_job[1] !== undefined) {
+				Idv_job[1].map(function(val, idx) {
+					if(idx > 30 && val !== undefined) {
+						Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
+					}
+				});
+			}
+
+			Idv_ttl.map(function(arg, sfx) {
+				arg.map(function(val, idx) {
+					if(idx > 30 && val !== undefined) {
+						Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
+					}
+				});
 			});
 		}
-
-		if(Idv_job[1] !== undefined) {
-			Idv_job[1].map(function(val, idx) {
-				if(idx > 30 && val !== undefined) {
-					Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
-				}
-			});
-		}
-
-		Idv_ttl.map(function(arg, sfx) {
-			arg.map(function(val, idx) {
-				if(idx > 30 && val !== undefined) {
-					Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
-				}
-			});
-		});
 
 		rst_skl = "_";
 		var Spp = [];
@@ -976,177 +1071,329 @@
 				}
 			}
 		});
-		if(flg !== 0) {
-			clc_all();
-			return;
+		
+		if(spr === 0) {
+			if(flg !== 0) {
+				clc_all();
+				return;
+			}
+
+			Spp.forEach(function(val, idx) {
+				if	(idx === 1) {
+					//暗器使い
+					for(i = 0; i <= 2; i++) {
+						if(Sum_amm[i] !== undefined) {
+							Sum_amm[i].forEach(function(val, idx) {
+								if(idx !== 54 && (idx < 77 || 89 < idx) && idx !== 52) val /= 2;
+								else { val = 0; }
+								Sum_all[idx] = isNaN(Sum_all[idx]) ? -1 * val : (Sum_all[idx] - val);
+							});
+						}
+					}
+				}
+				else if	(idx === 2) {
+					//ウォークライ
+					var hat = Math.max(0, Math.min((((isNaN(Sum_all[106]) ? 0 : Sum_all[106]) + 100) / 10), 100));
+					Mag_all[33] = isNaN(Mag_all[33]) ? hat : (Mag_all[33] + hat);
+					Mag_all[35] = isNaN(Mag_all[35]) ? hat : (Mag_all[35] + hat);
+				}
+				else if	(idx === 3) {
+					//根源との接触
+					
+				}
+			});
+
+			var pct;
+			var mag;
+			var tmp;
+			txt = "";
+			$(".r_sts").hide();
+			$(".t_val").text("");
+			$(".t_pct").text("");
+			$(".t_mag").text("");
+			Sum_all.map(function(val, idx) {
+				if(idx > 30 && val !== undefined) {
+					tmp = "";
+					pct = "";
+					mag = "";
+					const clc_reg = {
+						0: function() { return (Math.abs(val) / 2); },
+						1: function() { return (Math.abs(val) - 100) / 4 + 50; },
+						2: function() { return (Math.abs(val) - 200) / 8 + 75; },
+						3: function() { return (Math.abs(val) - 300) / 16 + 87.5; },
+						4: function() { return (Math.abs(val) - 400) / 32 + 93.75; },
+						5: function() { return 99; },
+					}
+					if	(idx <= 38) {
+						tmp = parseInt((Idv_rac[idx] !== undefined) ? Idv_rac[idx] : 0);
+						tmp += parseInt((Idv_job[1] !== undefined && Idv_job[1][idx] !== undefined) ? Idv_job[1][idx] : 0);
+						tmp *= parseInt((Sum_all[121] !== undefined) ? Sum_all[121] : 0) / 100;
+						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
+						val = Math.max(Math.round((val +  tmp) * mag), 1);
+						mag = "(x" + mag.toFixed(2) + ")";
+					}
+					else if	(idx <= 39) {
+						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
+						val = Math.max(Math.floor(val * mag), 1);
+						mag = "(x" + mag.toFixed(2) + ")";
+					}
+					else if	(idx <= 46) {
+						val = ((val > 0) ? "+" : "") + val.toFixed(1);
+						pct = "%";
+					}
+					else if	(idx <= 47) {
+						val = ((val > 0) ? "+" + val.toFixed(1) : 0);
+						pct = "%";
+					}
+					else if	(idx <= 50) {
+						val = ((val > 0) ? "+" : "") + val.toFixed(1);
+						pct = "%";
+					}
+					else if	(idx <= 51) {
+						val = ((val > 0) ? "+" : "") + val.toFixed(1);
+					}
+					else if	(idx <= 52) {
+						mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
+						val = ((val > 0) ? "+" : "-") + (Math.floor(clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() * 10) / 10).toFixed(1);
+						pct = "%";
+					}
+					else if	(idx <= 53) {
+						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
+						val = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
+						if(mag !== 1)	mag = "(x" + mag.toFixed(2) + ")";
+						else		mag = "";
+						pct = "%";
+					}
+					else if	(idx <= 55) {
+						val = ((val > 0) ? "+" : "") + val.toFixed(1);
+					}
+					else if	(idx <= 64) {
+						val = ((val > 0) ? "+" : "") + val.toFixed(1);
+						pct = "%";
+					}
+					else if	(idx <= 75) {
+						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
+						tmp = (val * mag).toFixed(1);
+						mag = "(" + ((tmp > 0) ? "+" : "") + tmp + ")";
+						val = ((val > 0) ? "+" : "-") + (Math.floor(clc_reg[Math.floor(Math.abs(((Math.abs(tmp) < 600) ? tmp : 500)/100))]() * 10) / 10).toFixed(1);
+						pct = "%";
+					}
+					else if	(idx <= 76) {
+						if(val > 100000) val = "無効";
+						else {
+							mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
+							val = ((val > 0) ? "+" : "-") + (Math.floor(clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() * 10) / 10).toFixed(1);
+							pct = "%";
+						}
+					}
+					else if	(idx <= 88) {
+						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
+						tmp = (val * mag).toFixed(1);
+						mag = "(" + ((val > 0) ? "+" : "") + tmp + ")";
+						val = ((val > 0) ? "+" : "-") + (Math.floor(clc_reg[Math.floor(Math.abs(((Math.abs(tmp) < 600) ? tmp : 500)/100))]() * 10) / 10).toFixed(1);
+						pct = "%";
+					}
+					else if	(idx <= 89) {
+						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
+						val = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
+						pct = "%";
+						if(mag !== 1)	mag = "(x" + mag.toFixed(2) + ")";
+						else		mag = "";
+					}
+					else if	(idx <= 100) {
+						if(val > 100000) val = "無効";
+						else {
+							mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
+							val = ((val > 0) ? "+" : "-") + (Math.floor(clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() * 10) / 10).toFixed(1);
+							pct = "%";
+						}
+					}
+					else if	(idx <= 101) {
+						val = ((val > 0) ? "+" : "") + val.toFixed(1);
+						pct = "%";
+					}
+					else if	(idx <= 102) {
+						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
+						val = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
+						if(mag !== 1)	mag = "(x" + mag.toFixed(2) + ")";
+						else		mag = "";
+					}
+					else if	(idx <= 104) {
+						val = ((val > 0) ? "+" : "") + val.toFixed(1);
+						pct = "%";
+					}
+					else if	(idx <= 106) {
+						val = ((val > 0) ? "+" : "") + val.toFixed(1);
+					}
+					else if	(idx <= 107) {
+						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
+						val = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
+						if(mag !== 1)	mag = "(x" + mag.toFixed(2) + ")";
+						else		mag = "";
+						pct = "%";
+					}
+					else if	(idx <= 126) {
+						val = ((val > 0) ? "+" : "") + val.toFixed(1);
+						pct = "%";
+					}
+
+					if(val != 0) {
+						$("#as" + idx + "v").text(val);
+						$("#as" + idx + "p").text(pct);
+						$("#as" + idx + "m").text(mag);
+						$("#as" + idx).show();
+					}
+				}
+			});
 		}
+	}
 
-		Spp.forEach(function(val, idx) {
-			if	(idx === 1) {
-				//暗器使い
-				for(i = 0; i <= 2; i++) {
-					if(Sum_amm[i] !== undefined) {
-						Sum_amm[i].forEach(function(val, idx) {
-							if(idx !== 54 && (idx < 77 || 89 < idx) && idx !== 52) val /= 2;
-							else { val = 0; }
-							Sum_all[idx] = isNaN(Sum_all[idx]) ? -1 * val : (Sum_all[idx] - val);
-						});
-					}
-				}
-			}
-			else if	(idx === 2) {
-				//ウォークライ
-				var hat = Math.max(0, Math.min((((isNaN(Sum_all[106]) ? 0 : Sum_all[106]) + 100) / 10), 100));
-				Mag_all[33] = isNaN(Mag_all[33]) ? hat : (Mag_all[33] + hat);
-				Mag_all[35] = isNaN(Mag_all[35]) ? hat : (Mag_all[35] + hat);
-			}
-			else if	(idx === 3) {
-				//根源との接触
-				
+	function get_cns() {
+		var url = "";
+		var knd;
+		prc_cod();
+		$("[type=text]:visible").add($(".mst")).not(".frw, .qry").each(function() {
+			if($(this).val().length > 0) {
+				knd = $(this).attr("id");
+				if	(knd.substr(0, 2) === "sk") knd = "s";
+				else if	(knd.substr(0, 2) === "fs") knd = "fs";
+				url += "&" + knd + "=" + Cod_all[$(this).val()];
 			}
 		});
+		url = location.origin + location.pathname + "?" + url.slice(1);
 
-		var pct;
-		var mag;
-		var tmp;
-		txt = "";
-		$(".r_sts").hide();
-		$(".t_val").text("");
-		$(".t_pct").text("");
-		$(".t_mag").text("");
-		Sum_all.map(function(val, idx) {
-			if(idx > 30 && val !== undefined) {
-				tmp = "";
-				pct = "";
-				mag = "";
-				const clc_reg = {
-					0: function() { return (Math.abs(val) / 2); },
-					1: function() { return (Math.abs(val) - 100) / 4 + 50; },
-					2: function() { return (Math.abs(val) - 200) / 8 + 75; },
-					3: function() { return (Math.abs(val) - 300) / 16 + 87.5; },
-					4: function() { return (Math.abs(val) - 400) / 32 + 93.75; },
-					5: function() { return 99; },
-				}
-				if	(idx <= 38) {
-					tmp = parseInt((Idv_rac[idx] !== undefined) ? Idv_rac[idx] : 0);
-					tmp += parseInt((Idv_job[1] !== undefined && Idv_job[1][idx] !== undefined) ? Idv_job[1][idx] : 0);
-					tmp *= parseInt((Sum_all[121] !== undefined) ? Sum_all[121] : 0) / 100;
-					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-					val = Math.max(Math.round((val +  tmp) * mag), 1);
-					mag = "(x" + mag.toFixed(2) + ")";
-				}
-				else if	(idx <= 39) {
-					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-					val = Math.max(Math.floor(val * mag), 1);
-					mag = "(x" + mag.toFixed(2) + ")";
-				}
-				else if	(idx <= 46) {
-					val = ((val > 0) ? "+" : "") + val.toFixed(1);
-					pct = "%";
-				}
-				else if	(idx <= 47) {
-					val = ((val > 0) ? "+" + val.toFixed(1) : 0);
-					pct = "%";
-				}
-				else if	(idx <= 50) {
-					val = ((val > 0) ? "+" : "") + val.toFixed(1);
-					pct = "%";
-				}
-				else if	(idx <= 51) {
-					val = ((val > 0) ? "+" : "") + val.toFixed(1);
-				}
-				else if	(idx <= 52) {
-					mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
-					val = ((val > 0) ? "+" : "-") + (Math.floor(clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() * 10) / 10).toFixed(1);
-					pct = "%";
-				}
-				else if	(idx <= 53) {
-					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-					val = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
-					if(mag !== 1)	mag = "(x" + mag.toFixed(2) + ")";
-					else		mag = "";
-					pct = "%";
-				}
-				else if	(idx <= 55) {
-					val = ((val > 0) ? "+" : "") + val.toFixed(1);
-				}
-				else if	(idx <= 64) {
-					val = ((val > 0) ? "+" : "") + val.toFixed(1);
-					pct = "%";
-				}
-				else if	(idx <= 75) {
-					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-					tmp = (val * mag).toFixed(1);
-					mag = "(" + ((tmp > 0) ? "+" : "") + tmp + ")";
-					val = ((val > 0) ? "+" : "-") + (Math.floor(clc_reg[Math.floor(Math.abs(((Math.abs(tmp) < 600) ? tmp : 500)/100))]() * 10) / 10).toFixed(1);
-					pct = "%";
-				}
-				else if	(idx <= 76) {
-					if(val > 100000) val = "無効";
-					else {
-						mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
-						val = ((val > 0) ? "+" : "-") + (Math.floor(clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() * 10) / 10).toFixed(1);
-						pct = "%";
-					}
-				}
-				else if	(idx <= 88) {
-					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-					tmp = (val * mag).toFixed(1);
-					mag = "(" + ((val > 0) ? "+" : "") + tmp + ")";
-					val = ((val > 0) ? "+" : "-") + (Math.floor(clc_reg[Math.floor(Math.abs(((Math.abs(tmp) < 600) ? tmp : 500)/100))]() * 10) / 10).toFixed(1);
-					pct = "%";
-				}
-				else if	(idx <= 89) {
-					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-					val = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
-					pct = "%";
-					if(mag !== 1)	mag = "(x" + mag.toFixed(2) + ")";
-					else		mag = "";
-				}
-				else if	(idx <= 100) {
-					if(val > 100000) val = "無効";
-					else {
-						mag = "(" + ((val > 0) ? "+" : "") + val.toFixed(1) + ")";
-						val = ((val > 0) ? "+" : "-") + (Math.floor(clc_reg[Math.floor(Math.abs(((Math.abs(val) < 600) ? val : 500)/100))]() * 10) / 10).toFixed(1);
-						pct = "%";
-					}
-				}
-				else if	(idx <= 101) {
-					val = ((val > 0) ? "+" : "") + val.toFixed(1);
-					pct = "%";
-				}
-				else if	(idx <= 102) {
-					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-					val = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
-					if(mag !== 1)	mag = "(x" + mag.toFixed(2) + ")";
-					else		mag = "";
-				}
-				else if	(idx <= 104) {
-					val = ((val > 0) ? "+" : "") + val.toFixed(1);
-					pct = "%";
-				}
-				else if	(idx <= 106) {
-					val = ((val > 0) ? "+" : "") + val.toFixed(1);
-				}
-				else if	(idx <= 107) {
-					mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-					val = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
-					if(mag !== 1)	mag = "(x" + mag.toFixed(2) + ")";
-					else		mag = "";
-					pct = "%";
-				}
-				else if	(idx <= 126) {
-					val = ((val > 0) ? "+" : "") + val.toFixed(1);
-					pct = "%";
-				}
+		for(var i = 5; i > 1; i--) {
+			$("#fr" + i).val($("#fr" + (i - 1)).val());
+			$("#qr" + i).val($("#qr" + (i - 1)).val());
+		}
+		$("#fr1").val("");
+		$("#qr1").val(url);
+		$("#qr1").attr("data-url", url);
+	}
 
-				if(val != 0) {
-					$("#as" + idx + "v").text(val);
-					$("#as" + idx + "p").text(pct);
-					$("#as" + idx + "m").text(mag);
-					$("#as" + idx).show();
+	function set_cns(arg) {
+		var Pck = decodeURI(arg).slice(1).split("&");
+		var Pck_tmp;
+		var Pck_skl = [];
+		var Vrf_skl = [];
+		var knd;
+		var fnc;
+		var prm;
+
+		$("[type=text]").not(".frw, .qry").val("");
+		$(".brk").text("");
+		Idv_opt = [];
+		Idv_aka = [];
+		Idv_eqp = [];
+		Idv_rac = [];
+		Idv_job = [];
+		Idv_ttl = [];
+		Idv_fsn = [];
+		Idv_mst = [];
+		Idv_skl = [];
+		Idv_all = [];
+		Sum_opt = [];
+		Mag_opt = [];
+		Mag_aka = [];
+		Mag_tmp = [];
+		Cor_fsn = [[],[],[],[],];
+		Cor_skl = [[],[],[],[],];
+
+		prc_cod();
+
+		spr = 1;
+		Pck.forEach(function(val, idx) {
+			Pck_tmp = val.split("=");
+			knd = Pck_tmp[0];
+			if	(knd.length === 1) {
+				Pck_skl.push(prc_prm(Cod_skl, Pck_tmp[1]));
+				return true;
+			}
+			else if	(knd.length === 2) {
+				fnc = prc_fsn;
+				Pck_tmp[0] = $(".fsn:last").attr("id");
+				prm = prc_prm(Cod_fsn, Pck_tmp[1])
+			}
+			else {
+				knd = knd.substr(0, 2);
+				if	(knd === "ms") {
+					fnc = prc_mst;
+					prm = prc_prm(Cod_mst, Pck_tmp[1])
+				}
+				else if	(knd === "rc") {
+					fnc = prc_rac;
+					prm = prc_prm(Cod_rac, Pck_tmp[1])
+				}
+				else if	(knd === "jb") {
+					fnc = prc_job;
+					prm = prc_prm(Cod_job, Pck_tmp[1])
+				}
+				else if	(knd === "tt") {
+					fnc = prc_ttl;
+					prm = prc_prm(Cod_ttl, Pck_tmp[1])
+				}
+				else {
+					knd = Pck_tmp[0].substr(3, 1);
+					if	(knd === "o") {
+						fnc = prc_opt;
+						prm = prc_prm(Cod_opt, Pck_tmp[1])
+					}
+					else if	(knd === "a") {
+						fnc = prc_aka;
+						prm = prc_prm(Cod_aka, Pck_tmp[1])
+					}
+					else if	(knd === "e") {
+						fnc = prc_eqp;
+						prm = prc_prm(Cod_eqp, Pck_tmp[1])
+					}
 				}
 			}
+			fnc($("#" + Pck_tmp[0]).val(prm));
 		});
+		$(".skl").each(function() {
+			if(!Pck_skl.includes($(this).val())) prc_skl($(this).val(""));
+			else Vrf_skl.push($(this).val());
+		});
+		Pck_skl.forEach(function(val, idx) {
+			if(!Vrf_skl.includes(val)) prc_skl($(".skl:last").val(val), "self");
+		});
+
+		spr = 0;
+		clc_all();
+	}
+
+	function prc_cod() {
+		if(Cod_all.length === 0) {
+			Dat_opt.forEach(val => Cod_opt[val[0]] = val[3]);
+			Dat_aka.forEach(val => Cod_aka[val[0]] = val[3]);
+			Dat_eqp.forEach(val => Cod_eqp[val[0]] = val[3]);
+			Dat_rac.forEach(val => Cod_rac[val[0]] = val[3]);
+			Dat_job.forEach(val => Cod_job[val[0]] = val[3]);
+			Dat_ttl.forEach(val => Cod_ttl[val[0]] = val[3]);
+			Dat_fsn.forEach(val => Cod_fsn[val[0]] = val[3]);
+			Dat_mst.forEach(val => Cod_mst[val[0]] = val[3]);
+			Dat_skl.forEach(val => Cod_skl[val[0]] = val[3]);
+
+			Cod_all = {...Cod_opt, ...Cod_aka, ...Cod_eqp, ...Cod_rac, ...Cod_job, ...Cod_ttl, ...Cod_fsn, ...Cod_mst, ...Cod_skl};
+		}
+	}
+
+	function prc_prm(arg, qry) {
+		return Object.keys(arg).find(val => arg[val] === qry);
+	}
+
+	function stn_bit() {
+		var url = "https://api-ssl.bitly.com/v3/shorten?access_token=8229da93c62b6d86b563a1a7a103626cc95d24bd&longUrl=" + encodeURIComponent($("#qr1").val());
+		var stn = new $.Deferred();
+		$.ajax({
+			type: "GET",
+			dataType: "jsonp",
+			url: url,
+			contentType: false,
+			processData: false,
+			success: stn.resolve,
+			error: stn.reject,
+		});
+		return stn.promise();
 	}
 });

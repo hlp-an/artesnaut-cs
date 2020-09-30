@@ -1,4 +1,4 @@
-.ui-autocomplete {
+﻿.ui-autocomplete {
 	max-height: 60%;
 	overflow-y: auto;
 	overflow-x: auto;
@@ -47,7 +47,6 @@ body {
 }
 
 input[type="text"] {
-	background-color: #FFFFFF;
 	border: 1px #888888 solid;
 	height: 5.2vmin;
 	font-size: 5vmin;
@@ -208,10 +207,55 @@ input[type="text"] {
 	padding: 0 8vmin 0 0;
 }
 
+.d_adm {
+	font-size: 90%;
+	margin: 0 0 3vmin 0;
+	padding: 2vmin 2vmin 0 5vmin;
+	background-color: #FFE3BF;
+}
+.d_hdl {
+	display: flex;
+	justify-content: space-between;
+	margin: 0px 0px 3vmin 0px;
+}
+.hdl_h {
+	font-size: 3vw;
+	height: 10vmin;
+	width: 40vmin;
+	background-color: #FFF7DF;
+}
+.d_vlt {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0px 0px 2vmin 0px;
+}
+.d_tag {
+	display: flex;
+	flex-direction: column;
+}
+.frw {
+	order: 2;
+	width: 60vmin;
+	background-color: #F9F9F9;
+}
+.qry {
+	order: 1;
+	text-align: center;
+	width: 60vmin;
+	background-color: #FFF7DF;
+}
+.hdl_r {
+	font-size: 3vw;
+	height: 10vmin;
+	width: 20vmin;
+	background-color: #FFF7DF;
+}
+
 .d_ins {
 	font-size: 90%;
-	background-color: #FFE3BF;
 	padding: 5vmin;
+	background-color: #FFE3BF;
 }
 .s_nt1 {
 	padding: 0px 0px 0px 1em;

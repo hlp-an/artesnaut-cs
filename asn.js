@@ -1,4 +1,4 @@
-var Asn = {
+﻿var Asn = {
 	"wp1": 0,
 	"wp2": 1,
 	"wp3": 2,

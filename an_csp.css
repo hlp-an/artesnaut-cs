@@ -1,4 +1,4 @@
-.ui-autocomplete {
+﻿.ui-autocomplete {
 	max-height: 60%;
 	overflow-y: auto;
 	overflow-x: auto;
@@ -32,7 +32,6 @@ body {
 input[type="text"] {
 	font-size: 14px;
 	padding: 2px 3px;
-	background-color: #FFFFFF;
 	border: 1px #888888 solid;
 }
 
@@ -191,11 +190,50 @@ input[type="text"] {
 	padding: 0px 15px 0px 0px;
 }
 
+.d_adm {
+	font-size: 90%;
+	margin: 0px 0px 15px 0px;
+	padding: 10px 10px 0px 10px;
+	background-color: #FFE3BF;
+}
+.d_cmd {
+	display: flex;
+	justify-content: space-between;
+}
+.d_hdl {
+	margin: 0px 0px 10px 0px;
+}
+.hdl_h {
+	width: 140px;
+	background-color: #FFF7DF;
+}
+.d_vlt {
+	display: flex;
+	justify-content: space-between;
+	padding: 0px 0px 10px 0px;
+}
+.d_tag {
+	padding: 3px 0px 0px 0px;
+}
+.frw {
+	width: 340px;
+	background-color: #FBFBFB;
+}
+.qry {
+	height: 15px;
+	width: 135px;
+	background-color: #FFF7DF;
+}
+.hdl_r {
+	width: 80px;
+	background-color: #FFF7DF;
+}
+
 .d_ins {
 	font-size: 90%;
-	background-color: #FFE3BF;
 	width: 580px;
 	padding: 10px;
+	background-color: #FFE3BF;
 }
 .s_nt1 {
 	padding: 0px 0px 0px 1em;
