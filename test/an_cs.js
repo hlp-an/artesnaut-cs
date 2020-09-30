@@ -32,6 +32,23 @@
 			}
 		});
 
+		$("#ad2").on("click", function() {
+			get_cns();
+			$("#qr1").select();
+			document.execCommand("copy");
+		});
+
+		$("#ad4").on("click", function() {
+			get_cns();
+			stn_bit().done(function(val) {
+				if(val.data.url) $("#qr1").val(val.data.url);
+				$("#qr1").select();
+				document.execCommand("copy");
+			}).fail(function() {
+				alert("短縮URLの取得に失敗しました。1時間の生成制限に達した可能性があります。");
+			});
+		});
+
 		$(".clr").on("click", function() {
 			$(this).prev().val("").focus().autocomplete("close");
 		});
@@ -63,6 +80,23 @@
 			}
 		});
 
+		$("#ad2").on("click", function() {
+			get_cns();
+			$("#qr1").focus().get(0).setSelectionRange(0, $("#qr1").val().length);
+			document.execCommand("copy");
+		});
+
+		$("#ad4").on("click", function() {
+			get_cns();
+			stn_bit().done(function(val) {
+				if(val.data.url) $("#qr1").val(val.data.url);
+				$("#qr1").focus().get(0).setSelectionRange(0, $("#qr1").val().length);
+				document.execCommand("copy");
+			}).fail(function() {
+				alert("短縮URLの取得に失敗しました。1時間の生成制限に達した可能性があります。");
+			});
+		});
+
 		$(".clr").on("click", function() {
 			$(this).prev().val("").autocomplete("search", "").autocomplete("close");
 		});
@@ -72,27 +106,10 @@
 		get_cns();
 	});
 
-	$("#ad2").on("click", function() {
-		get_cns();
-		$("#qr1").select();
-		document.execCommand("copy");
-	});
-
 	$("#ad3").on("click", function() {
 		get_cns();
 		stn_bit().done(function(val) {
 			if(val.data.url) $("#qr1").val(val.data.url);
-		}).fail(function() {
-			alert("短縮URLの取得に失敗しました。1時間の生成制限に達した可能性があります。");
-		});
-	});
-
-	$("#ad4").on("click", function() {
-		get_cns();
-		stn_bit().done(function(val) {
-			if(val.data.url) $("#qr1").val(val.data.url);
-			$("#qr1").select();
-			document.execCommand("copy");
 		}).fail(function() {
 			alert("短縮URLの取得に失敗しました。1時間の生成制限に達した可能性があります。");
 		});
