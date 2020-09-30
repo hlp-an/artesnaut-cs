@@ -109,8 +109,10 @@
 				set_cns(tgt.attr("data-url").slice(dmn.length));
 			}
 			else if(tgt.val().length > 0){
+/*
 				fetch($(tgt).val()).then(val => tgt.attr("data-url", val.url));
 				set_cns(tgt.attr("data-url").slice(dmn.length));
+*/
 			}
 		}
 	});
