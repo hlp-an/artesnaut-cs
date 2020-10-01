@@ -1,12 +1,4 @@
 ﻿$(function(){
-
-	$("#tg6").on("click", function() {
-		$(".eqp").autocomplete( {
-			source: Lst_eqp[0],
-		});
-	});
-
-
 	$("#tg1").on("click", function() {
 		$(".inf").toggle();
 		$(".brk").toggle();
@@ -14,6 +6,25 @@
 	});
 
 	$("#tg3").on("click", function() {
+		if	(rst_don === 0) {
+			rst_don++;
+			$(this).text("昼夜の最低値を計算");
+			$(".d_hln").text("ステータス(夜)");
+		}
+		else if	(rst_don === 1) {
+			rst_don++;
+			$(this).text("昼間の能力値を計算");
+			$(".d_hln").text("ステータス(最低値)");
+		}
+		else if	(rst_don === 2) {
+			rst_don = 0;
+			$(this).text("夜間の能力値を計算");
+			$(".d_hln").text("ステータス(昼)");
+		}
+		clc_all();
+	});
+
+	$("#tg4").on("click", function() {
 		$(".b_mst").toggle();
 		($(".b_mst").css("display") === "none") ? $(this).text("極意スキル欄表示") : $(this).text("極意スキル欄非表示");
 	});
@@ -150,8 +161,7 @@
 		$("#ac5").hide();
 		$("#ac6").hide();
 
-		$("#rc1").val(Lst_rac[0]);
-		prc_rac($("#rc1"));
+		prc_rac($("#rc1").val(Lst_rac[0]));
 
 		var Lst_mst_tmp = Dat_mst.filter(val => val[1] === 7);
 		for(var i = 1; i <= 6; i++) {
@@ -250,10 +260,10 @@
 	var rst_job = "_1_2_3_4_5_6_7_8_";
 	var rst_skl = "";
 
+	var rst_don = 0;
+
 	var Grp = [];
 	var Pnt = [];
-	var txt;
-	var skl;
 	var spr = 0;
 
 	//opt
@@ -300,6 +310,9 @@
 			Idv_opt[arg * 3 + ofs].map(function(val, idx) {
 				if(idx > 30 && val !== undefined) {
 					Sum_opt[arg][idx] = isNaN(Sum_opt[arg][idx]) ? val : (Sum_opt[arg][idx] + val);
+				}
+				else if(idx === 2 && val !== undefined) {
+					Sum_opt[arg][idx] = (Sum_opt[arg][idx] === undefined) ? val : (Sum_opt[arg][idx] + ", " + val);
 				}
 			});
 			if(Idv_opt[arg * 3 + ofs][0] !== undefined && Idv_opt[arg * 3 + ofs][0].length > 0) {
@@ -363,7 +376,7 @@
 	}
 
 	function clc_amm() {
-		txt = "";
+		var txt = "";
 		if(Sum_opt[Asn[Grp["amm"]]] !== undefined) {
 			Sum_opt[Asn[Grp["amm"]]].map(function(val, idx) {
 				if(idx > 30 && val !== undefined) {
@@ -374,8 +387,8 @@
 		}
 		$("#" + Grp["amm"] + "bo").text(txt);
 
-		txt = "";
-		skl = "";
+		var txt = "";
+		var skl = "";
 		if(Idv_aka[Asn[Grp["amm"]]] !== undefined) {
 			Idv_aka[Asn[Grp["amm"]]].map(function(val, idx, Ary) {
 				if(val !== undefined) {
@@ -392,9 +405,10 @@
 		}
 		$("#" + Grp["amm"] + "ba").text(txt + skl);
 
-		txt = "";
-		skl = "";
+		var txt = "";
+		var skl = "";
 		if(Idv_eqp[Asn[Grp["amm"]]] !== undefined) {
+			if(Idv_eqp[Asn[Grp["amm"]]][2] !== undefined) txt += Idv_eqp[Asn[Grp["amm"]]][2] + "　";
 			Idv_eqp[Asn[Grp["amm"]]].map(function(val, idx, Ary) {
 				if(val !== undefined) {
 					if(idx > 30) {
@@ -411,7 +425,7 @@
 		$("#" + Grp["amm"] + "be").text(txt + skl);
 	}
 
-	function rst_wpn() {
+	function rst_wpn(tgt) {
 		Lst_eqp[15] = [];
 		for(var i = 1; i <= 14; i++) {
 			if(RegExp("_" + i + "_").test(rst_job + rst_skl)) {
@@ -419,6 +433,12 @@
 			}
 		}
 		$("#wp1e").autocomplete( {
+			source: Lst_eqp[15],
+		});
+		$("#wp2e").autocomplete( {
+			source: Lst_eqp[15],
+		});
+		$("#wp3e").autocomplete( {
 			source: Lst_eqp[15],
 		});
 	}
@@ -446,8 +466,8 @@
 	}
 
 	function clc_rac() {
-		txt = "";
-		skl = "";
+		var txt = "";
+		var skl = "";
 		if(Idv_rac !== undefined) {
 			Idv_rac.map(function(val, idx, Ary) {
 				if(val !== undefined) {
@@ -489,8 +509,8 @@
 	}
 
 	function clc_job() {
-		txt = "";
-		skl = "";
+		var txt = "";
+		var skl = "";
 		if(Grp["job"] == 1) {
 			if(Idv_job[1] !== undefined) {
 				Idv_job[1].map(function(val, idx, Ary) {
@@ -547,8 +567,8 @@
 	}
 
 	function clc_ttl() {
-		txt = "";
-		skl = "";
+		var txt = "";
+		var skl = "";
 		if(Idv_ttl[Grp["ttl"]] !== undefined) {
 			Idv_ttl[Grp["ttl"]].map(function(val, idx, Ary) {
 				if(val !== undefined) {
@@ -638,8 +658,8 @@
 	}
 
 	function clc_fsn() {
-		txt = "";
-		skl = "";
+		var txt = "";
+		var skl = "";
 		if(Idv_fsn[Pnt["fsn"]] !== undefined) {
 			Idv_fsn[Pnt["fsn"]].map(function(val, idx, Ary) {
 				if(val !== undefined) {
@@ -913,6 +933,8 @@
 	}
 
 	function clc_all() {
+		var Elm_wpn = [];
+		var Elm_amm = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 		var Sum_amm = [[],[]];
 		var Sum_all = [];
 		var Mag_all = [];
@@ -923,9 +945,14 @@
 					Sum_amm[sfx] = [];
 				}
 				arg.map(function(val, idx) {
-					val *= 1 + ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
-					Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
+					if(idx > 30 && val !== undefined) {
+						val *= 1 + ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
+						Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
+					}
 				});
+				if(arg[2] !== undefined) {
+					Sum_amm[sfx][2] = (Sum_amm[sfx][2] === undefined) ? arg[2] : (Sum_amm[sfx][2] + ", " + arg[2]);
+				}
 			});
 			Idv_aka.map(function(arg, sfx) {
 				if(Sum_amm[sfx] === undefined) {
@@ -941,9 +968,17 @@
 					Sum_amm[sfx] = [];
 				}
 				arg.map(function(val, idx) {
-					val *= 1 + ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
-					Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
+					if(idx > 30 && val !== undefined) {
+						val *= 1 + ((Mag_opt[sfx] === undefined) ? 0 : Mag_opt[sfx]) + ((Mag_aka[sfx] === undefined) ? 0 : Mag_aka[sfx]);
+						Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
+					}
 				});
+				if(arg[0].length > 0) {
+					Sum_amm[sfx][1] = arg[1];
+				}
+				if(arg[2] !== undefined) {
+					Sum_amm[sfx][2] = (Sum_amm[sfx][2] === undefined) ? arg[2] : (Sum_amm[sfx][2] + ", " + arg[2]);
+				}
 			});
 
 			Idv_fsn.map(function(arg, sfx) {
@@ -990,12 +1025,15 @@
 						rst_wpn();
 					}
 					else if(idx === 128) {
-						//武器属性 += ", " + val;
+						//武器属性
+						Elm_wpn[val] = 1;
 					}
 					else if(idx === 129) {
+						//特殊処理
 						Spp[val] = 1;
 					}
 					else if(idx === 130) {
+						//装備枠変更
 						if	(val === 1) {
 							//暗器使い
 							Eqp_cnt[0] += 2;
@@ -1067,26 +1105,46 @@
 						Sum_amm[Asn[Asn[sfx] + i]].forEach(function(val, idx) {
 							Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
 						});
+						Elm_amm[Sum_amm[Asn[Asn[sfx] + i]][1]] = 1;
+						if(sfx === 0) {
+							(" " + Sum_amm[Asn[Asn[sfx] + i]][2]).split(",").forEach(function(val, idx) {
+								Elm_wpn[val.slice(1)] = 1;
+							});
+						}
 					}
 				}
 			}
 		});
-		
+		if((Elm_amm[1] + Elm_amm[2] + Elm_amm[3] + Elm_amm[4] + Elm_amm[5] + Elm_amm[6] + Elm_amm[7] + Elm_amm[8]) === 0) {
+			Elm_wpn["壊"] = 1;
+			Elm_wpn["格闘"] = 1;
+			Elm_wpn["素手"] = 1;
+		}
+
 		if(spr === 0) {
 			if(flg !== 0) {
 				clc_all();
 				return;
 			}
 
+			var lmt_evd = 80;
+			var Mag_don = [[], []];
+			Mag_don[0] = [];
+			Mag_don[1] = [];
+			Mag_don[2] = [];
+			Mag_don[0][36] = isNaN(Sum_all[108]) ? 0 : Sum_all[108];
+			Mag_don[0][37] = isNaN(Sum_all[109]) ? 0 : Sum_all[109];
+			Mag_don[1][36] = isNaN(Sum_all[110]) ? 0 : Sum_all[110];
+			Mag_don[1][37] = isNaN(Sum_all[111]) ? 0 : Sum_all[111];
 			Spp.forEach(function(val, idx) {
 				if	(idx === 1) {
 					//暗器使い
-					for(i = 0; i <= 2; i++) {
-						if(Sum_amm[i] !== undefined) {
-							Sum_amm[i].forEach(function(val, idx) {
+					for(i = 0; i < Eqp_cnt[0]; i++) {
+						if(Sum_amm[i + Asn["wp1"]] !== undefined) {
+							Sum_amm[i + Asn["wp1"]].forEach(function(val, idx) {
 								if(idx !== 54 && (idx < 77 || 89 < idx) && idx !== 52) val /= 2;
 								else { val = 0; }
-								Sum_all[idx] = isNaN(Sum_all[idx]) ? -1 * val : (Sum_all[idx] - val);
+								Sum_all[idx] = -1 * val + (isNaN(Sum_all[idx]) ? 0 : Sum_all[idx]);
 							});
 						}
 					}
@@ -1094,19 +1152,131 @@
 				else if	(idx === 2) {
 					//ウォークライ
 					var hat = Math.max(0, Math.min((((isNaN(Sum_all[106]) ? 0 : Sum_all[106]) + 100) / 10), 100));
-					Mag_all[33] = isNaN(Mag_all[33]) ? hat : (Mag_all[33] + hat);
-					Mag_all[35] = isNaN(Mag_all[35]) ? hat : (Mag_all[35] + hat);
+					Mag_all[33] = hat + (isNaN(Mag_all[33]) ? 0 : Mag_all[33]);
+					Mag_all[35] = hat + (isNaN(Mag_all[35]) ? 0 : Mag_all[35]);
 				}
 				else if	(idx === 3) {
+					//シールドウェポン
+					for(i = 0; i < Eqp_cnt[1]; i++) {
+						if(Sum_amm[i + Asn["sh1"]] !== undefined && Sum_amm[i + Asn["sh1"]][33] !== undefined) {
+							Sum_all[32] = (Sum_amm[i + Asn["sh1"]][33] / 2) + (isNaN(Sum_all[32]) ? 0 : Sum_all[32]);
+						}
+					}
+				}
+				else if	(idx === 4) {
+					//怪盗乱磨
+					Mag_all[36] = Math.max(Mag_all[112], 0) + (isNaN(Mag_all[36]) ? 0 : Mag_all[36]);
+				}
+				else if	(idx === 5) {
+					//怪盗乱舞
+					Mag_all[37] = Math.max(Mag_all[112], 0) + (isNaN(Mag_all[37]) ? 0 : Mag_all[37]);
+				}
+				else if	(idx === 6) {
+					//蛍雪之功
+					if(Sum_all[101] !== undefined) {
+						Mag_all[31] = Math.max((Sum_all[101] / 10).toFixed(1), 0) + (isNaN(Mag_all[31]) ? 0 : Mag_all[31]);
+					}
+				}
+				else if	(idx === 7) {
 					//根源との接触
-					
+					["斬", "壊", "突", "火", "水", "風", "地", "雷"].forEach(function(val, idx) {
+						if(Elm_wpn[val] !== undefined && Elm_wpn[val] > 0) {
+							Sum_all[idx + 56] = 30 + ((Sum_all[idx + 56] === undefined) ? 0 : Sum_all[idx + 56]);
+						}
+					});
+				}
+				else if	(idx === 8) {
+					//マジックアーマー
+					["斬", "壊", "突", "火", "水", "風", "地", "雷"].forEach(function(val, idx) {
+						if(Elm_wpn[val] !== undefined && Elm_wpn[val] > 0) {
+							Sum_all[idx + 65] = 30 + ((Sum_all[idx + 65] === undefined) ? 0 : Sum_all[idx + 65]);
+						}
+					});
+				}
+				else if	(idx === 9) {
+					//両手持ち
+					if(((Elm_amm[2] + Elm_amm[3] + Elm_amm[4] + Elm_amm[5] + Elm_amm[8]) !== 0) && (Elm_amm[9] === 0)) {
+						Mag_all[32] = 30 + (isNaN(Mag_all[32]) ? 0 : Mag_all[32]);
+					}
+				}
+				else if	(idx === 10) {
+					//ホークアイ
+					if(Elm_amm[7] === 1) {
+						Mag_all[36] = 50 + (isNaN(Mag_all[36]) ? 0 : Mag_all[36]);
+					}
+				}
+				else if	(11 <= idx && idx <= 13) {
+					//シールドブロックLv.1～3
+					if(Elm_amm[9] === 1) {
+						var rev;
+						if	(idx === 11) rev = 10;
+						else if	(idx === 12) rev = 12;
+						else if	(idx === 13) rev = 15;
+						Sum_all[118] = rev + (isNaN(Sum_all[118]) ? 0 : Sum_all[118]);
+						Sum_all[119] = rev + (isNaN(Sum_all[119]) ? 0 : Sum_all[119]);
+						Sum_all[120] = rev + (isNaN(Sum_all[120]) ? 0 : Sum_all[120]);
+					}
+				}
+				else if	(idx === 14) {
+					//徒手空拳
+					if(Elm_wpn["素手"] === 1) {
+						Sum_all[53] = 50 + (isNaN(Sum_all[53]) ? 0 : Sum_all[53]);
+						Sum_all[124] = 20 + (isNaN(Sum_all[124]) ? 0 : Sum_all[124]);
+					}
+				}
+				else if	(idx === 15) {
+					//鋭利な爪
+					if(Elm_wpn["素手"] === 1) {
+						Sum_all[47] = 50 + (isNaN(Sum_all[47]) ? 0 : Sum_all[47]);
+						Sum_all[48] = 10 + (isNaN(Sum_all[48]) ? 0 : Sum_all[48]);
+						Sum_all[54] = 500 + (isNaN(Sum_all[54]) ? 0 : Sum_all[54]);
+					}
+				}
+				else if	(idx === 16) {
+					//鉄拳
+					if(Elm_wpn["素手"] === 1) {
+						Sum_all[32] = 300 + (isNaN(Sum_all[32]) ? 0 : Sum_all[32]);
+						Sum_all[54] = 200 + (isNaN(Sum_all[54]) ? 0 : Sum_all[54]);
+					}
+				}
+				else if	(idx === 17) {
+					//一撃必殺
+					if(Math.max(Math.floor(Sum_all[39] * (100 + ((Mag_all[39] === undefined) ? 0 : Mag_all[39])) / 100), 1) === 1) {
+						Sum_all[48] = 50 + (isNaN(Sum_all[48]) ? 0 : Sum_all[48]);
+					}
+				}
+				else if	(idx === 18) {
+					//擬態
+					var rev = (isNaN(Sum_all[109]) ? 0 : Sum_all[109]) + (isNaN(Sum_all[111]) ? 0 : Sum_all[111]);
+					Mag_don[0][37] = rev;
+					Mag_don[1][37] = rev;
+				}
+				else if	(idx === 19) {
+					//[上限]回避率Lv.2
+					lmt_evd = 84;
+				}
+				else if	(idx === 20) {
+					//[上限]回避率Lv.3
+					lmt_evd = 86;
+				}
+				else if	(idx === 21) {
+					//アンデッド
+					Mag_don[1][31] = 15;
+					Mag_don[1][32] = 15;
+					Mag_don[1][33] = 15;
+					Mag_don[1][34] = 15;
+					Mag_don[1][35] = 15;
+					Mag_don[1][36] = 15 + (isNaN(Mag_don[1][36]) ? 0 : Mag_don[1][36]);
+					Mag_don[1][37] = 15 + (isNaN(Mag_don[1][37]) ? 0 : Mag_don[1][37]);
+					Mag_don[1][38] = 15;
+					Mag_don[1][39] = 15;
 				}
 			});
 
 			var pct;
 			var mag;
 			var tmp;
-			txt = "";
+			var txt = "";
 			$(".r_sts").hide();
 			$(".t_val").text("");
 			$(".t_pct").text("");
@@ -1125,15 +1295,19 @@
 						5: function() { return 99; },
 					}
 					if	(idx <= 38) {
+						if(rst_don === 2) Mag_don[2][idx] = Math.min((isNaN(Mag_don[0][idx]) ? 0 : Mag_don[0][idx]), (isNaN(Mag_don[1][idx]) ? 0 : Mag_don[1][idx]));
 						tmp = parseInt((Idv_rac[idx] !== undefined) ? Idv_rac[idx] : 0);
 						tmp += parseInt((Idv_job[1] !== undefined && Idv_job[1][idx] !== undefined) ? Idv_job[1][idx] : 0);
 						tmp *= parseInt((Sum_all[121] !== undefined) ? Sum_all[121] : 0) / 100;
-						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
-						val = Math.max(Math.round((val +  tmp) * mag), 1);
+						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx]) + ((Mag_don[rst_don][idx] === undefined) ? 0 : Mag_don[rst_don][idx])) / 100;
+						val = (val +  tmp) * mag;
+						if(idx === 32 && Elm_wpn["格闘"] === 1) val *= (100 + parseInt(((isNaN(Sum_all[53]) ? 0 : Sum_all[53]) * (100 + (isNaN(Mag_all[53]) ? 0 : Mag_all[53])) / 100).toFixed(1))) / 100;
+						val = Math.max(Math.round(val), 1);
 						mag = "(x" + mag.toFixed(2) + ")";
 					}
 					else if	(idx <= 39) {
-						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx])) / 100;
+						if(rst_don === 2) Mag_don[2][idx] = Math.min((isNaN(Mag_don[0][idx]) ? 0 : Mag_don[0][idx]), (isNaN(Mag_don[1][idx]) ? 0 : Mag_don[1][idx]));
+						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx]) + ((Mag_don[rst_don][idx] === undefined) ? 0 : Mag_don[rst_don][idx])) / 100;
 						val = Math.max(Math.floor(val * mag), 1);
 						mag = "(x" + mag.toFixed(2) + ")";
 					}
@@ -1230,6 +1404,15 @@
 						val = (((val * mag) > 0) ? "+" : "") + (val * mag).toFixed(1);
 						if(mag !== 1)	mag = "(x" + mag.toFixed(2) + ")";
 						else		mag = "";
+						pct = "%";
+					}
+					else if	(idx <= 114) {
+						val = ((val > 0) ? "+" : "") + val.toFixed(1);
+						pct = "%";
+					}
+					else if	(idx <= 117) {
+						val = Math.min(val, lmt_evd);
+						val = ((val > 0) ? "+" : "") + val.toFixed(1);
 						pct = "%";
 					}
 					else if	(idx <= 126) {
