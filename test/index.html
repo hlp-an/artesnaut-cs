@@ -13,8 +13,8 @@
 			<div class="d_btn">
 					<button type="button" id="tg1" class="tgl_e">詳細表示</button>
 					<button type="button" id="tg2" class="tgl_s">ステータス表示</button>
-					<button type="button" id="tg3" class="tgl_m">極意スキル欄表示</button>
-					<button type="button" id="tg6" class="tgl_e">装備制限解除</button>
+					<button type="button" id="tg3" class="tgl_s">夜間の能力値を計算</button>
+					<button type="button" id="tg4" class="tgl_m">極意スキル欄表示</button>
 			</div>
 
 			<table class="t_amm">
@@ -1501,7 +1501,7 @@
 				このツールを利用することにより生じた損害について、作者は一切の責任を負わないものとします。<br>
 				ご意見・ご報告はTwitter(@HLP77066875)へ。<br>
 				<br>
-				現在のバージョンはBeta2.0.1です。<br>
+				現在のバージョンはBeta3.1.0です。<br>
 				バージョンアップ予定は以下の通りです。なお、予定は変更される可能性が大いにあります。<br>
 				<ul>
 					<li>
@@ -1512,19 +1512,23 @@
 						Beta2<span class="s_nt1">コンセプト：一部のビルドがシステム的に構築不能である問題の改善</span>
 						<div class="d_nt1">スキル「暗器使い」「両手盾」「過剰装飾」「器用貧乏」「半竜の大角」の実装</div>
 					</li><br>
-
 					<li>
 						Beta3<span class="s_nt1">コンセプト：テストプレイの効率化・機会増加</span>
 						<div class="d_nt1">保存・共有機能の実装</div>
 							<div class="d_nt2">データのURL化</div>
-							<div class="d_nt2">テキストエリアでのデータ一括編集</div>
 					</li><br>
 					<li>
-						Beta4<span class="s_nt1">コンセプト：様々な組み合わせでのデバッグに向けて</span>
+						Beta3.1<span class="s_nt1">コンセプト：様々な組み合わせでのデバッグに向けて</span>
 						<div class="d_nt1">スキル「シールドウェポン」「根源との接触」「マジックアーマー」「徒手空拳」「鋭利な爪」「鉄拳」「一撃必殺」等の実装</div>
 						<div class="d_nt1">スキル「両手持ち」「ホークアイ」等の判定厳密化</div>
 						<div class="d_nt1">ステータス「格闘」「昼間命中」「昼間回避」「夜間命中」「夜間回避」等のステータス計算への適用</div>
 						<div class="d_nt1">ステータス計算において「昼間」「夜間」「最低値で計算」を切り替える機能の実装</div>
+					</li><br>
+					<li>
+						Beta4<span class="s_nt1">コンセプト：テストプレイの効率化・機会増加</span>
+						<div class="d_nt1">保存・共有機能の強化</div>
+							<div class="d_nt2">共有されたURLのテキストボックスでの読み込み機能</div>
+							<div class="d_nt2">テキストエリアでのデータ一括編集</div>
 					</li><br>
 					<li>
 						Beta5<span class="s_nt1">コンセプト：利便性の向上 / 要デバッグ</span>
@@ -1558,7 +1562,7 @@
 		</div>
 		<div>
 			<div class="d_rsl">
-				<div class="d_hln">ステータス</div>
+				<div class="d_hln">ステータス(昼)</div>
 				<div class="d_aln">
 					<table class="t_sts">
 						<tbody>
@@ -1794,13 +1798,13 @@
 									<td id="as65m" class="t_mag"></td>
 								</tr>
 								<tr id="as66" class="r_sts">
-									<td class="t_itm">耐性：突</td>
+									<td class="t_itm">耐性：壊</td>
 									<td id="as66v" class="t_val"></td>
 									<td id="as66p" class="t_pct"></td>
 									<td id="as66m" class="t_mag"></td>
 								</tr>
 								<tr id="as67" class="r_sts">
-									<td class="t_itm">耐性：壊</td>
+									<td class="t_itm">耐性：突</td>
 									<td id="as67v" class="t_val"></td>
 									<td id="as67p" class="t_pct"></td>
 									<td id="as67m" class="t_mag"></td>
