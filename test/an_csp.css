@@ -44,12 +44,12 @@ input[type="text"] {
 	top: 0px;
 	right: 0px;
 	height: 22px;
-	width: 22px;
-	margin: 2px;
 	cursor: pointer;
 	vertical-align: middle;
 	text-align: center;
 	font-size: 20px;
+	width: 22px;
+	margin: 2px;
 }
 
 .a_flx {
@@ -115,11 +115,21 @@ input[type="text"] {
 .mst {
 	width: 466px;
 }
+.tps {
+	display: none;
+	width: 474px;
+	font-size: 90%;
+}
 .z_skl {
 	display: none;
 }
+.chk {
+	transform: scale(1.5, 1.5);
+	-webkit-transform: scale(1.5, 1.5);
+	vertical-align: middle;
+}
 .skl {
-	width: 466px;
+	width: 441px;
 }
 
 .t_cls {

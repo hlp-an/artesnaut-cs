@@ -60,12 +60,12 @@ input[type="text"] {
 	position: absolute;
 	top: 0px;
 	right: 0px;
-	height: 8vmin;
-	width: 8vmin;
 	cursor: pointer;
 	vertical-align: middle;
 	text-align: center;
 	font-size: 6vmin;
+	height: 8vmin;
+	width: 8vmin;
 }
 
 .a_flx {
@@ -128,11 +128,20 @@ input[type="text"] {
 .mst {
 	width: 75vmin;
 }
+.tps {
+	display: none;
+}
 .z_skl {
 	display: none;
 }
+.chk {
+	transform: scale(3.5, 3.5);
+	-webkit-transform: scale(3.5, 3.5);
+	vertical-align: super;
+	margin: 0 1vmin 0 1.7vmin;
+}
 .skl {
-	width: 75vmin;
+	width: 70vmin;
 }
 
 .d_cls {
