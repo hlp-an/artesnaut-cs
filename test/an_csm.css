@@ -137,7 +137,7 @@ input[type="text"] {
 .chk {
 	transform: scale(3.5, 3.5);
 	-webkit-transform: scale(3.5, 3.5);
-	vertical-align: super;
+	vertical-align: middle;
 	margin: 0 1vmin 0 1.7vmin;
 }
 .skl {
