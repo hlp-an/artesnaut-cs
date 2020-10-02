@@ -1174,11 +1174,11 @@
 				}
 				else if	(idx === 4) {
 					//怪盗乱磨
-					Mag_all[36] = Math.max(Mag_all[112], 0) + (isNaN(Mag_all[36]) ? 0 : Mag_all[36]);
+					Mag_all[36] = Math.max(isNaN(Sum_all[112]) ? 0 : Sum_all[112], 0) + (isNaN(Mag_all[36]) ? 0 : Mag_all[36]);
 				}
 				else if	(idx === 5) {
 					//怪盗乱舞
-					Mag_all[37] = Math.max(Mag_all[112], 0) + (isNaN(Mag_all[37]) ? 0 : Mag_all[37]);
+					Mag_all[37] = Math.max(isNaN(Sum_all[112]) ? 0 : Sum_all[112], 0) + (isNaN(Mag_all[37]) ? 0 : Mag_all[37]);
 				}
 				else if	(idx === 6) {
 					//蛍雪之功
