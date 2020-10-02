@@ -1,7 +1,14 @@
 ﻿$(function(){
+//	$(".chk").change(function() {
+//	$(".chk").on("change", function() {
+	$(document).on("change", ".chk", function() {
+		prc_skl($("#" + $(this).attr("id").slice(0, -1)), "self");
+	});
+
 	$("#tg1").on("click", function() {
 		$(".inf").toggle();
 		$(".brk").toggle();
+		$(".tps").toggle();
 		($(".brk").css("display") === "none") ? $(this).text("詳細表示") : $(this).text("一覧表示");
 	});
 
@@ -682,7 +689,7 @@
 		bdy.attr("data-num", num);
 		bdy.find(".b_lbl").text("セット" + num);
 		bdy.find(".z_acp").attr("id", "fs" + num);
-		bdy.find(".brk").attr("id", "fs" + num + "b");
+		bdy.find(".tps").attr("id", "fs" + num + "b");
 		bdy.find(".fs" + (num - 1)).attr("class", "fs" + num);
 		bdy.insertAfter($(".z_fsn:last"));
 
@@ -796,48 +803,47 @@
 	};
 
 	function prc_skl(tgt, org) {
-		var flg;
-
 		Grp["skl"] = $(tgt).attr("id");
 		if(Grp["skl"] !== undefined) {
 			Pnt["skl"] = Grp["skl"].slice(2);
-			flg = 0;
-
-			Idv_skl[Pnt["skl"]] = Dat_skl.find(val => val[0] === $(tgt).val());
+			var vns = Idv_skl[Pnt["skl"]];
+			Idv_skl[Pnt["skl"]] = Object.create(Dat_skl.find(val => val[0] === $(tgt).val()));
 			if(Idv_skl[Pnt["skl"]] === undefined) Idv_skl[Pnt["skl"]] = [];
 
-			if(Idv_skl[Pnt["skl"]].length !== 0) {
+			var flg = 0;
+			if(Idv_skl[Pnt["skl"]][0].length !== 0) {
 				flg = 1;
 				if(Cor_skl[0].includes(Idv_skl[Pnt["skl"]][0])) flg = 2;
+				Idv_skl[Pnt["skl"]][4] = !$("#" + Grp["skl"] + "f").prop("checked");
 
 				if(!Cor_skl[3].includes(Idv_skl[Pnt["skl"]][0] + "/" + org)) {
 					Cor_skl[0].push(Idv_skl[Pnt["skl"]][0]);
 					Cor_skl[2].push(org);
 					Cor_skl[3].push(Idv_skl[Pnt["skl"]][0] + "/" + org);
 					if(flg !== 2)	Cor_skl[1].push(Grp["skl"]);
-					else 		Cor_skl[1].push(Cor_skl[1][Cor_skl[0].indexOf(Idv_skl[Pnt["skl"]][0])]);
+					else		Cor_skl[1].push(Cor_skl[1][Cor_skl[0].indexOf(Idv_skl[Pnt["skl"]][0])]);
 				}
 			}
 
 			if(flg === 2) {
 				if(org === "self") {
-					//該当するセルに色塗るかなんか
+					if(vns[0] === Idv_skl[Pnt["skl"]][0] && vns[4] !== Idv_skl[Pnt["skl"]][4] && !Idv_skl[Pnt["skl"]][4]) {
+						if(Cor_skl[0].filter(val => val === vns[0]).length > 1) {
+							var idx;
+							idx = Cor_skl[3].indexOf(vns[0] + "/self");
+							Cor_skl[0].splice(idx, 1);
+							Cor_skl[1].splice(idx, 1);
+							Cor_skl[2].splice(idx, 1);
+							Cor_skl[3].splice(idx, 1);
+						}
+					}
 				}
 				else {
 					Idv_skl[Pnt["skl"]] = [];
 					$(tgt).val("");
 				}
 			}
-			else if(org === "self" && flg === 0) {
-				var tal = Cor_skl[2].length - 1;
-				Cor_skl[2].slice().reverse().forEach(function(val, idx) {
-					if(val === org) {
-						Cor_skl[0].splice(tal - idx, 1);
-						Cor_skl[1].splice(tal - idx, 1);
-						Cor_skl[2].splice(tal - idx, 1);
-						Cor_skl[3].splice(tal - idx, 1);
-					}
-				});
+			else if(flg === 0 && org === "self" && vns !== undefined) {
 			}
 		}
 
@@ -868,8 +874,9 @@
 		var num = parseInt($(bdy).attr("data-num")) + 1;
 		bdy.attr("data-num", num);
 		bdy.find(".b_lbl").text("スキル" + num);
+		bdy.find(".chk").attr("id", "sk" + num + "f");
 		bdy.find(".z_acp").attr("id", "sk" + num);
-		bdy.find(".brk").attr("id", "sk" + num + "b");
+		bdy.find(".tps").attr("id", "sk" + num + "b");
 		bdy.find(".sk" + (num - 1)).attr("class", "sk" + num);
 		bdy.insertAfter($(".z_skl:last"));
 
@@ -1018,60 +1025,62 @@
 		var Spp = [];
 		var Eqp_cnt = [1, 1, 1, 1, 1, 1, 3];
 		Idv_mst.concat(Idv_skl).map(function(arg, sfx) {
-			arg.map(function(val, idx) {
-				if(idx > 30 && val !== undefined) {
-					if(idx === 127) {
-						rst_skl += val + "_";
-						rst_wpn();
-					}
-					else if(idx === 128) {
-						//武器属性
-						Elm_wpn[val] = 1;
-					}
-					else if(idx === 129) {
-						//特殊処理
-						Spp[val] = 1;
-					}
-					else if(idx === 130) {
-						//装備枠変更
-						if	(val === 1) {
-							//暗器使い
-							Eqp_cnt[0] += 2;
-							Eqp_cnt[1] -= 1;
-							Eqp_cnt[6] -= 3;
-							rst_job = "_";
-							rst_skl += 1 + "_";
+			if(!arg[4]) {
+				arg.map(function(val, idx) {
+					if(idx > 30 && val !== undefined) {
+						if(idx === 127) {
+							rst_skl += val + "_";
 							rst_wpn();
 						}
-						else if	(val === 2) {
-							//両手盾
-							Eqp_cnt[0] -= 1;
-							Eqp_cnt[1] += 1;
+						else if(idx === 128) {
+							//武器属性
+							Elm_wpn[val] = 1;
 						}
-						else if	(val === 3) {
-							//過剰装飾
-							Eqp_cnt[0] -= 1;
-							Eqp_cnt[1] -= 1;
-							Eqp_cnt[6] += 2;
+						else if(idx === 129) {
+							//特殊処理
+							Spp[val] = 1;
 						}
-						else if	(val === 4) {
-							//器用貧乏
-							Eqp_cnt[6] += 1;
+						else if(idx === 130) {
+							//装備枠変更
+							if	(val === 1) {
+								//暗器使い
+								Eqp_cnt[0] += 2;
+								Eqp_cnt[1] -= 1;
+								Eqp_cnt[6] -= 3;
+								rst_job = "_";
+								rst_skl += 1 + "_";
+								rst_wpn();
+							}
+							else if	(val === 2) {
+								//両手盾
+								Eqp_cnt[0] -= 1;
+								Eqp_cnt[1] += 1;
+							}
+							else if	(val === 3) {
+								//過剰装飾
+								Eqp_cnt[0] -= 1;
+								Eqp_cnt[1] -= 1;
+								Eqp_cnt[6] += 2;
+							}
+							else if	(val === 4) {
+								//器用貧乏
+								Eqp_cnt[6] += 1;
+							}
+							else if	(val === 5) {
+								//半竜の大角
+								Eqp_cnt[2] -= 1;
+							}
 						}
-						else if	(val === 5) {
-							//半竜の大角
-							Eqp_cnt[2] -= 1;
+						else if(Math.abs(val) < 0.001) {
+							val *= 1000000;
+							Mag_all[idx] = isNaN(Mag_all[idx]) ? val : (Mag_all[idx] + val);
+						}
+						else {
+							Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
 						}
 					}
-					else if(Math.abs(val) < 0.001) {
-						val *= 1000000;
-						Mag_all[idx] = isNaN(Mag_all[idx]) ? val : (Mag_all[idx] + val);
-					}
-					else {
-						Sum_all[idx] = isNaN(Sum_all[idx]) ? val : (Sum_all[idx] + val);
-					}
-				}
-			});
+				});
+			}
 		});
 
 		var dif;
@@ -1165,11 +1174,11 @@
 				}
 				else if	(idx === 4) {
 					//怪盗乱磨
-					Mag_all[36] = Math.max(Mag_all[112], 0) + (isNaN(Mag_all[36]) ? 0 : Mag_all[36]);
+					Mag_all[36] = Math.max(isNaN(Sum_all[112]) ? 0 : Sum_all[112], 0) + (isNaN(Mag_all[36]) ? 0 : Mag_all[36]);
 				}
 				else if	(idx === 5) {
 					//怪盗乱舞
-					Mag_all[37] = Math.max(Mag_all[112], 0) + (isNaN(Mag_all[37]) ? 0 : Mag_all[37]);
+					Mag_all[37] = Math.max(isNaN(Sum_all[112]) ? 0 : Sum_all[112], 0) + (isNaN(Mag_all[37]) ? 0 : Mag_all[37]);
 				}
 				else if	(idx === 6) {
 					//蛍雪之功
@@ -1465,6 +1474,7 @@
 
 		$("[type=text]").not(".frw, .qry").val("");
 		$(".brk").text("");
+		$(".tps").text("");
 		Idv_opt = [];
 		Idv_aka = [];
 		Idv_eqp = [];
