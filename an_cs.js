@@ -1,6 +1,4 @@
 ﻿$(function(){
-//	$(".chk").change(function() {
-//	$(".chk").on("change", function() {
 	$(document).on("change", ".chk", function() {
 		prc_skl($("#" + $(this).attr("id").slice(0, -1)), "self");
 	});
@@ -1447,13 +1445,19 @@
 	function get_cns() {
 		var url = "";
 		var knd;
+		var frz;
 		prc_cod();
 		$("[type=text]:visible").add($(".mst")).not(".frw, .qry").each(function() {
 			if($(this).val().length > 0) {
+				frz = "";
 				knd = $(this).attr("id");
-				if	(knd.substr(0, 2) === "sk") knd = "s";
-				else if	(knd.substr(0, 2) === "fs") knd = "fs";
-				url += "&" + knd + "=" + Cod_all[$(this).val()];
+				if	(knd.substr(0, 2) === "fs") knd = "fs";
+				else if	(knd.substr(0, 2) === "sk") {
+					if($("#" + knd + "f").prop("checked"))	frz = "0";
+					else					frz = "1";
+					knd = "s";
+				}
+				url += "&" + knd + "=" + frz + Cod_all[$(this).val()];
 			}
 		});
 		url = location.origin + location.pathname + "?" + url.slice(1);
@@ -1470,11 +1474,12 @@
 	function set_cns(arg) {
 		var Pck = decodeURI(arg).slice(1).split("&");
 		var Pck_tmp;
-		var Pck_skl = [];
+		var Pck_skl = [[],[]];
 		var Vrf_skl = [];
 		var knd;
 		var fnc;
 		var prm;
+		var frz;
 
 		$("[type=text]").not(".frw, .qry").val("");
 		$(".brk").text("");
@@ -1503,7 +1508,8 @@
 			Pck_tmp = val.split("=");
 			knd = Pck_tmp[0];
 			if	(knd.length === 1) {
-				Pck_skl.push(prc_prm(Cod_skl, Pck_tmp[1]));
+				Pck_skl[0].push(prc_prm(Cod_skl, Pck_tmp[1].slice(1)));
+				Pck_skl[1].push(Pck_tmp[1].substr(0, 1) == 0);
 				return true;
 			}
 			else if	(knd.length === 2) {
@@ -1548,10 +1554,17 @@
 			fnc($("#" + Pck_tmp[0]).val(prm));
 		});
 		$(".skl").each(function() {
-			if(!Pck_skl.includes($(this).val())) prc_skl($(this).val(""));
-			else Vrf_skl.push($(this).val());
+			if(!Pck_skl[0].includes($(this).val())) prc_skl($(this).val(""));
+			else {
+				Vrf_skl.push($(this).val());
+				frz = Pck_skl[1][Pck_skl[0].indexOf($(this).val())];
+				if(!frz) {
+					$("#" + $(this).attr("id") + "f").prop("checked", frz);
+					prc_skl(this, "self");
+				}
+			}
 		});
-		Pck_skl.forEach(function(val, idx) {
+		Pck_skl[0].forEach(function(val, idx) {
 			if(!Vrf_skl.includes(val)) prc_skl($(".skl:last").val(val), "self");
 		});
 
