@@ -978,7 +978,7 @@
 						Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
 					}
 				});
-				if(arg[0].length > 0) {
+				if(arg[0] !== undefined && arg[0].length > 0) {
 					Sum_amm[sfx][1] = arg[1];
 				}
 				if(arg[2] !== undefined) {
