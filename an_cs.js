@@ -30,6 +30,7 @@
 	});
 
 	$("#tg4").on("click", function() {
+console.log(Cor_skl);
 		$(".b_mst").toggle();
 		($(".b_mst").css("display") === "none") ? $(this).text("極意スキル欄表示") : $(this).text("極意スキル欄非表示");
 	});
@@ -842,6 +843,12 @@
 				}
 			}
 			else if(flg === 0 && org === "self" && vns !== undefined) {
+				var idx;
+				idx = Cor_skl[0].indexOf(vns[0]);
+				Cor_skl[0].splice(idx, 1);
+				Cor_skl[1].splice(idx, 1);
+				Cor_skl[2].splice(idx, 1);
+				Cor_skl[3].splice(idx, 1);
 			}
 		}
 
