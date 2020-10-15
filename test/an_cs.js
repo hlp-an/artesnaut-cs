@@ -30,8 +30,7 @@
 	});
 
 	$("#tg4").on("click", function() {
-//		$.get($("#qr1").val())
-		$.get('list.html')
+		$.get($("#qr1").val())
 		.done(function(data) {
 			console.log(data);
 		});
