@@ -1,6 +1,4 @@
 ﻿$(function(){
-//	$(".chk").change(function() {
-//	$(".chk").on("change", function() {
 	$(document).on("change", ".chk", function() {
 		prc_skl($("#" + $(this).attr("id").slice(0, -1)), "self");
 	});
@@ -32,8 +30,15 @@
 	});
 
 	$("#tg4").on("click", function() {
+//		$.get($("#qr1").val())
+		$.get('list.html')
+		.done(function(data) {
+			console.log(data);
+		});
+/*
 		$(".b_mst").toggle();
 		($(".b_mst").css("display") === "none") ? $(this).text("極意スキル欄表示") : $(this).text("極意スキル欄非表示");
+*/
 	});
 
 	if($(window).width() > 980) {
@@ -609,17 +614,14 @@
 		});
 	};
 
-	function prc_fsn(tgt, org) {
-		var flg;
-
+	function prc_fsn(tgt, org = "self") {
 		Grp["fsn"] = $(tgt).attr("id");
 		if(Grp["fsn"] !== undefined) {
 			Pnt["fsn"] = Grp["fsn"].slice(2);
-
-			flg = 0;
 			Idv_fsn[Pnt["fsn"]] = Dat_fsn.find(val => val[0] === $(tgt).val());
 			if(Idv_fsn[Pnt["fsn"]] === undefined) Idv_fsn[Pnt["fsn"]] = [];
 
+			var flg = 0;
 			if(Idv_fsn[Pnt["fsn"]].length !== 0) {
 				flg = 1;
 				if(Cor_fsn[0].includes(Idv_fsn[Pnt["fsn"]][0])) flg = 2;
@@ -643,15 +645,11 @@
 				}
 			}
 			else if(org === "self" && flg === 0) {
-				var tal = Cor_fsn[2].length - 1;
-				Cor_fsn[2].slice().reverse().forEach(function(val, idx) {
-					if(val === org) {
-						Cor_fsn[0].splice(tal - idx, 1);
-						Cor_fsn[1].splice(tal - idx, 1);
-						Cor_fsn[2].splice(tal - idx, 1);
-						Cor_fsn[3].splice(tal - idx, 1);
-					}
-				});
+				var idx = Cor_fsn[0].indexOf(Idv_fsn[Pnt["fsn"]][0]);
+				Cor_fsn[0].splice(idx, 1);
+				Cor_fsn[1].splice(idx, 1);
+				Cor_fsn[2].splice(idx, 1);
+				Cor_fsn[3].splice(idx, 1);
 			}
 		}
 
@@ -802,7 +800,7 @@
 		});
 	};
 
-	function prc_skl(tgt, org) {
+	function prc_skl(tgt, org = "self") {
 		Grp["skl"] = $(tgt).attr("id");
 		if(Grp["skl"] !== undefined) {
 			Pnt["skl"] = Grp["skl"].slice(2);
@@ -844,6 +842,11 @@
 				}
 			}
 			else if(flg === 0 && org === "self" && vns !== undefined) {
+				var idx = Cor_skl[0].indexOf(vns[0]);
+				Cor_skl[0].splice(idx, 1);
+				Cor_skl[1].splice(idx, 1);
+				Cor_skl[2].splice(idx, 1);
+				Cor_skl[3].splice(idx, 1);
 			}
 		}
 
@@ -980,7 +983,7 @@
 						Sum_amm[sfx][idx] = isNaN(Sum_amm[sfx][idx]) ? val : (Sum_amm[sfx][idx] + val);
 					}
 				});
-				if(arg[0].length > 0) {
+				if(arg[0] !== undefined && arg[0].length > 0) {
 					Sum_amm[sfx][1] = arg[1];
 				}
 				if(arg[2] !== undefined) {
@@ -1447,13 +1450,19 @@
 	function get_cns() {
 		var url = "";
 		var knd;
+		var frz;
 		prc_cod();
 		$("[type=text]:visible").add($(".mst")).not(".frw, .qry").each(function() {
 			if($(this).val().length > 0) {
+				frz = "";
 				knd = $(this).attr("id");
-				if	(knd.substr(0, 2) === "sk") knd = "s";
-				else if	(knd.substr(0, 2) === "fs") knd = "fs";
-				url += "&" + knd + "=" + Cod_all[$(this).val()];
+				if	(knd.substr(0, 2) === "fs") knd = "fs";
+				else if	(knd.substr(0, 2) === "sk") {
+					if($("#" + knd + "f").prop("checked"))	frz = "0";
+					else					frz = "1";
+					knd = "s";
+				}
+				url += "&" + knd + "=" + frz + Cod_all[$(this).val()];
 			}
 		});
 		url = location.origin + location.pathname + "?" + url.slice(1);
@@ -1470,11 +1479,12 @@
 	function set_cns(arg) {
 		var Pck = decodeURI(arg).slice(1).split("&");
 		var Pck_tmp;
-		var Pck_skl = [];
+		var Pck_skl = [[],[]];
 		var Vrf_skl = [];
 		var knd;
 		var fnc;
 		var prm;
+		var frz;
 
 		$("[type=text]").not(".frw, .qry").val("");
 		$(".brk").text("");
@@ -1503,7 +1513,8 @@
 			Pck_tmp = val.split("=");
 			knd = Pck_tmp[0];
 			if	(knd.length === 1) {
-				Pck_skl.push(prc_prm(Cod_skl, Pck_tmp[1]));
+				Pck_skl[0].push(prc_prm(Cod_skl, Pck_tmp[1].slice(1)));
+				Pck_skl[1].push(Pck_tmp[1].substr(0, 1) == 0);
 				return true;
 			}
 			else if	(knd.length === 2) {
@@ -1548,10 +1559,17 @@
 			fnc($("#" + Pck_tmp[0]).val(prm));
 		});
 		$(".skl").each(function() {
-			if(!Pck_skl.includes($(this).val())) prc_skl($(this).val(""));
-			else Vrf_skl.push($(this).val());
+			if(!Pck_skl[0].includes($(this).val())) prc_skl($(this).val(""));
+			else {
+				Vrf_skl.push($(this).val());
+				frz = Pck_skl[1][Pck_skl[0].indexOf($(this).val())];
+				if(!frz) {
+					$("#" + $(this).attr("id") + "f").prop("checked", frz);
+					prc_skl(this, "self");
+				}
+			}
 		});
-		Pck_skl.forEach(function(val, idx) {
+		Pck_skl[0].forEach(function(val, idx) {
 			if(!Vrf_skl.includes(val)) prc_skl($(".skl:last").val(val), "self");
 		});
 
