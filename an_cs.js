@@ -1246,7 +1246,7 @@
 				}
 				else if	(idx === 17) {
 					//一撃必殺
-					if(Math.max(Math.floor(Sum_all[39] * (100 + ((Mag_all[39] === undefined) ? 0 : Mag_all[39])) / 100), 1) === 1) {
+					if(Math.max(Math.floor(Sum_all[39] * Math.max(0, (100 + ((Mag_all[39] === undefined) ? 0 : Mag_all[39]))) / 100), 1) === 1) {
 						Sum_all[48] = 50 + (isNaN(Sum_all[48]) ? 0 : Sum_all[48]);
 					}
 				}
@@ -1308,7 +1308,7 @@
 						tmp = parseInt((Idv_rac[idx] !== undefined) ? Idv_rac[idx] : 0);
 						tmp += parseInt((Idv_job[1] !== undefined && Idv_job[1][idx] !== undefined) ? Idv_job[1][idx] : 0);
 						tmp *= parseInt((Sum_all[121] !== undefined) ? Sum_all[121] : 0) / 100;
-						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx]) + ((Mag_don[rst_don][idx] === undefined) ? 0 : Mag_don[rst_don][idx])) / 100;
+						mag = Math.max(0, (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx]) + ((Mag_don[rst_don][idx] === undefined) ? 0 : Mag_don[rst_don][idx])) / 100);
 						val = (val +  tmp) * mag;
 						if(idx === 32 && Elm_wpn["格闘"] === 1) val *= (100 + parseInt(((isNaN(Sum_all[53]) ? 0 : Sum_all[53]) * (100 + (isNaN(Mag_all[53]) ? 0 : Mag_all[53])) / 100).toFixed(1))) / 100;
 						val = Math.max(Math.round(val), 1);
@@ -1316,7 +1316,7 @@
 					}
 					else if	(idx <= 39) {
 						if(rst_don === 2) Mag_don[2][idx] = Math.min((isNaN(Mag_don[0][idx]) ? 0 : Mag_don[0][idx]), (isNaN(Mag_don[1][idx]) ? 0 : Mag_don[1][idx]));
-						mag = (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx]) + ((Mag_don[rst_don][idx] === undefined) ? 0 : Mag_don[rst_don][idx])) / 100;
+						mag = Math.max(0, (100 + ((Mag_all[idx] === undefined) ? 0 : Mag_all[idx]) + ((Mag_don[rst_don][idx] === undefined) ? 0 : Mag_don[rst_don][idx])) / 100);
 						val = Math.max(Math.floor(val * mag), 1);
 						mag = "(x" + mag.toFixed(2) + ")";
 					}
