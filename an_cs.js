@@ -1,4 +1,4 @@
-﻿$(function(){
+$(function(){
 	$(document).on("change", ".chk", function() {
 		prc_skl($("#" + $(this).attr("id").slice(0, -1)), "self");
 	});
@@ -30,19 +30,8 @@
 	});
 
 	$("#tg4").on("click", function() {
-		var txt = "";
-		$("[type=text]:visible").not(".frw, .qry").each(function() {
-			if($(this).val().length > 0) {
-				txt += "<br>" + $(this).val();
-//				txt += "\n" + $(this).val();
-			}
-		});
-		$(".d_ins").html(txt);
-//		console.log(txt);
-/*
 		$(".b_mst").toggle();
 		($(".b_mst").css("display") === "none") ? $(this).text("極意スキル欄表示") : $(this).text("極意スキル欄非表示");
-*/
 	});
 
 	if($(window).width() > 980) {
