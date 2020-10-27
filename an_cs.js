@@ -1,4 +1,4 @@
-$(function(){
+﻿$(function(){
 	$(document).on("change", ".chk", function() {
 		prc_skl($("#" + $(this).attr("id").slice(0, -1)), "self");
 	});
@@ -1447,15 +1447,15 @@ $(function(){
 		prc_cod();
 		$("[type=text]:visible").add($(".mst")).not(".frw, .qry").each(function() {
 			if($(this).val().length > 0) {
-				frz = "";
 				knd = $(this).attr("id");
 				if	(knd.substr(0, 2) === "fs") knd = "fs";
 				else if	(knd.substr(0, 2) === "sk") {
 					if($("#" + knd + "f").prop("checked"))	frz = "0";
 					else					frz = "1";
-					knd = "s";
+					url += "&s=" + frz + Cod_skl[$(this).val()];
+					return true;
 				}
-				url += "&" + knd + "=" + frz + Cod_all[$(this).val()];
+				url += "&" + knd + "=" + Cod_all[$(this).val()];
 			}
 		});
 		url = location.origin + location.pathname + "?" + url.slice(1);
@@ -1582,7 +1582,7 @@ $(function(){
 			Dat_mst.forEach(val => Cod_mst[val[0]] = val[3]);
 			Dat_skl.forEach(val => Cod_skl[val[0]] = val[3]);
 
-			Cod_all = {...Cod_opt, ...Cod_aka, ...Cod_eqp, ...Cod_rac, ...Cod_job, ...Cod_ttl, ...Cod_fsn, ...Cod_mst, ...Cod_skl};
+			Cod_all = {...Cod_opt, ...Cod_aka, ...Cod_eqp, ...Cod_rac, ...Cod_job, ...Cod_ttl, ...Cod_fsn, ...Cod_mst};
 		}
 	}
 
